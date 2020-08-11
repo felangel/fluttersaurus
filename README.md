@@ -1,0 +1,3 @@
+# fluttersaurus
+
+A Flutter Thesaurus
