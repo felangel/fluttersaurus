@@ -39,6 +39,7 @@ class DatamuseApiClient {
   /// Means like constraint.
   /// Require that the results have a meaning related to this [query].
   /// Can be any word or sequence of words.
+  /// GET /words?ml=$query
   Future<List<Word>> meansLike(String query) async {
     assert(query != null && query.isNotEmpty);
     final uri = Uri.https(_authority, '/words', <String, String>{'ml': query});
@@ -55,16 +56,18 @@ class DatamuseApiClient {
       throw HttpRequestFailure(response.statusCode);
     }
 
-    List<Map<String, dynamic>> body;
+    List body;
 
     try {
-      body = json.decode(response.body) as List<Map<String, dynamic>>;
+      body = json.decode(response.body) as List;
     } on Exception {
       throw JsonDecodeException();
     }
 
     try {
-      return body.map((item) => Word.fromJson(item)).toList();
+      return body
+          .map((dynamic item) => Word.fromJson(item as Map<String, dynamic>))
+          .toList();
     } on Exception {
       throw JsonDeserializationException();
     }
