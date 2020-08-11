@@ -32,7 +32,7 @@ class DatamuseApiClient {
   DatamuseApiClient({http.Client httpClient})
       : _httpClient = httpClient ?? http.Client();
 
-  static final _authority = 'api.datamuse.com';
+  static const _authority = 'api.datamuse.com';
 
   final http.Client _httpClient;
 
