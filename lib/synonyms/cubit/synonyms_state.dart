@@ -2,8 +2,7 @@ part of 'synonyms_cubit.dart';
 
 enum SynonymsStatus { loading, success, failure }
 
-@immutable
-class SynonymsState {
+class SynonymsState extends Equatable {
   const SynonymsState._({
     this.status = SynonymsStatus.loading,
     this.synonyms = const <Synonym>[],
@@ -25,4 +24,7 @@ class SynonymsState {
       synonyms: synonyms ?? this.synonyms,
     );
   }
+
+  @override
+  List<Object> get props => [status, synonyms];
 }

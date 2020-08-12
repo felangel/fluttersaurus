@@ -56,5 +56,6 @@ const _$TagEnumMap = {
   Tag.adjective: 'adj',
   Tag.adverb: 'adv',
   Tag.properNoun: 'prop',
+  Tag.antonym: 'ant',
   Tag.unknown: 'u',
 };

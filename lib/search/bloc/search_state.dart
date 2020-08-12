@@ -1,15 +1,16 @@
 part of 'search_bloc.dart';
 
-enum SearchStatus { loading, success, failure }
+enum SearchStatus { initial, loading, success, failure }
 
-@immutable
-class SearchState {
+class SearchState extends Equatable {
   const SearchState._({
-    this.status = SearchStatus.loading,
+    this.status = SearchStatus.initial,
     this.suggestions = const <Suggestion>[],
   });
 
-  const SearchState.loading() : this._();
+  const SearchState.initial() : this._();
+
+  const SearchState.loading() : this._(status: SearchStatus.loading);
 
   const SearchState.success(List<Suggestion> suggestions)
       : this._(status: SearchStatus.success, suggestions: suggestions);
@@ -18,4 +19,7 @@ class SearchState {
 
   final SearchStatus status;
   final List<Suggestion> suggestions;
+
+  @override
+  List<Object> get props => [status, suggestions];
 }

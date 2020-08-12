@@ -51,6 +51,10 @@ enum Tag {
   @JsonValue('prop')
   properNoun,
 
+  /// Antonym
+  @JsonValue('ant')
+  antonym,
+
   /// Unknown
   @JsonValue('u')
   unknown,
