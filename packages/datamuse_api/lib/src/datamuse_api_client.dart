@@ -43,7 +43,18 @@ class DatamuseApiClient {
   Future<List<Word>> meansLike(String query) async {
     assert(query != null && query.isNotEmpty);
     final uri = Uri.https(_authority, '/words', <String, String>{'ml': query});
+    return _fetchWords(uri);
+  }
 
+  /// Provides word suggestions given a partially-entered query.
+  /// GET /sug?s=$query
+  Future<List<Word>> suggestions(String query) async {
+    assert(query != null && query.isNotEmpty);
+    final uri = Uri.https(_authority, '/sug', <String, String>{'s': query});
+    return _fetchWords(uri);
+  }
+
+  Future<List<Word>> _fetchWords(Uri uri) async {
     http.Response response;
 
     try {
