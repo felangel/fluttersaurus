@@ -2,22 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttersaurus/search/search.dart';
 import 'package:fluttersaurus/synonyms/synonyms.dart';
+import 'package:google_fonts/google_fonts.dart';
 
-class SearchForm extends StatefulWidget {
-  @override
-  _SearchFormState createState() => _SearchFormState();
-}
-
-class _SearchFormState extends State<SearchForm> {
-  final _controller = TextEditingController();
-
+class SearchForm extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
         SearchBar(
-          controller: _controller,
           onChanged: (term) {
             context.bloc<SearchBloc>().add(SearchTermChanged(term));
           },
@@ -35,12 +28,13 @@ class _SearchContent extends StatelessWidget {
     return Flexible(
       fit: FlexFit.loose,
       child: BlocConsumer<SearchBloc, SearchState>(
+        listenWhen: (previous, current) => previous.status != current.status,
         listener: (context, state) {
           if (state.status == SearchStatus.failure) {
             Scaffold.of(context)
               ..hideCurrentSnackBar()
               ..showSnackBar(
-                const SnackBar(content: Text('Oops try again!')),
+                const SnackBar(content: Text('oops try again!')),
               );
           }
         },
@@ -91,6 +85,12 @@ class _SearchInitial extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Text('Find some fancy words!');
+    final textTheme = Theme.of(context).textTheme;
+    return Text(
+      'Find some fancy words ✨',
+      style: GoogleFonts.roboto(
+        textStyle: textTheme.headline6.copyWith(fontWeight: FontWeight.w300),
+      ),
+    );
   }
 }

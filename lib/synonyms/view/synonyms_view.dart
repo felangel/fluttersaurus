@@ -45,32 +45,6 @@ class SynonymsView extends StatelessWidget {
   }
 }
 
-class _SynonymsLoading extends StatelessWidget {
-  const _SynonymsLoading({Key key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Shimmer.fromColors(
-      baseColor: Colors.grey[300],
-      highlightColor: Colors.grey[100],
-      enabled: true,
-      child: Column(
-        children: [
-          Container(
-            height: 48.0,
-            color: Colors.white,
-          ),
-          const SizedBox(height: 16),
-          Container(
-            height: 300.0,
-            color: Colors.white,
-          ),
-        ],
-      ),
-    );
-  }
-}
-
 class _SynonymsSuccess extends StatelessWidget {
   const _SynonymsSuccess({Key key, this.synonyms}) : super(key: key);
 
@@ -102,16 +76,34 @@ class _SynonymsSuccess extends StatelessWidget {
                 child: Text(
                   synonym.value,
                   style: GoogleFonts.robotoCondensed(
-                          textStyle: textTheme.headline6)
-                      .copyWith(
-                    fontWeight: FontWeight.w100,
-                  ),
+                    textStyle: textTheme.headline6,
+                  ).copyWith(fontWeight: FontWeight.w100),
                 ),
               );
             },
           ),
         )
       ],
+    );
+  }
+}
+
+class _SynonymsLoading extends StatelessWidget {
+  const _SynonymsLoading({Key key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Shimmer.fromColors(
+      baseColor: Colors.grey[300],
+      highlightColor: Colors.grey[100],
+      enabled: true,
+      child: Column(
+        children: [
+          Container(height: 48.0, color: Colors.white),
+          const SizedBox(height: 16),
+          Container(height: 300.0, color: Colors.white),
+        ],
+      ),
     );
   }
 }

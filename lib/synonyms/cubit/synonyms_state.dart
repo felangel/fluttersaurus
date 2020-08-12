@@ -18,13 +18,6 @@ class SynonymsState extends Equatable {
   final SynonymsStatus status;
   final List<Synonym> synonyms;
 
-  SynonymsState copyWith({SynonymsStatus status, List<Synonym> synonyms}) {
-    return SynonymsState._(
-      status: status ?? this.status,
-      synonyms: synonyms ?? this.synonyms,
-    );
-  }
-
   @override
   List<Object> get props => [status, synonyms];
 }

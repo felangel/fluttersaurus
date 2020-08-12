@@ -6,17 +6,14 @@ class SearchBar extends StatelessWidget {
     Key key,
     this.onChanged,
     this.trailing,
-    this.controller,
   }) : super(key: key);
 
   final ValueSetter<String> onChanged;
   final Widget trailing;
-  final TextEditingController controller;
 
   @override
   Widget build(BuildContext context) {
     return TextField(
-      controller: controller,
       style: GoogleFonts.roboto(),
       decoration: InputDecoration(
         filled: true,

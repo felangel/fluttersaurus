@@ -4,7 +4,6 @@ import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:fluttersaurus/search/models/suggestion.dart';
 import 'package:fluttersaurus/search/search.dart';
-import 'package:meta/meta.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:thesaurus_repository/thesaurus_repository.dart';
 
@@ -43,9 +42,11 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
       yield const SearchState.initial();
       return;
     }
+
     if (state.status != SearchStatus.success) {
       yield const SearchState.loading();
     }
+
     try {
       final results = await _thesaurusRepository.search(term: event.term);
       final suggestions = results.map((result) => Suggestion(result)).toList();
