@@ -6,7 +6,7 @@ void main() async {
   final datamuseApiClient = DatamuseApiClient();
 
   try {
-    final words = await datamuseApiClient.meansLike('cats');
+    final words = await datamuseApiClient.words(meansLike: 'cats', max: 1);
     for (final word in words) {
       print(word.word);
     }

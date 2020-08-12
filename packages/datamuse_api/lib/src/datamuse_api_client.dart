@@ -36,21 +36,39 @@ class DatamuseApiClient {
 
   final http.Client _httpClient;
 
-  /// Means like constraint.
-  /// Require that the results have a meaning related to this [query].
-  /// Can be any word or sequence of words.
-  /// GET /words?ml=$query
-  Future<List<Word>> meansLike(String query) async {
-    assert(query != null && query.isNotEmpty);
-    final uri = Uri.https(_authority, '/words', <String, String>{'ml': query});
+  /// Returns a list of words (and multiword expressions)
+  /// from a given vocabulary that match a given set of constraints.
+  Future<List<Word>> words({
+    String meansLike,
+    String soundsLike,
+    String spelledLike,
+    int max,
+  }) async {
+    final queryParams = <String, String>{};
+    if (meansLike != null) {
+      queryParams.addAll({'ml': meansLike});
+    }
+    if (soundsLike != null) {
+      queryParams.addAll({'sl': soundsLike});
+    }
+    if (spelledLike != null) {
+      queryParams.addAll({'sp': spelledLike});
+    }
+    if (max != null) {
+      queryParams.addAll({'max': '$max'});
+    }
+    final uri = Uri.https(_authority, '/words', queryParams);
     return _fetchWords(uri);
   }
 
   /// Provides word suggestions given a partially-entered query.
   /// GET /sug?s=$query
-  Future<List<Word>> suggestions(String query) async {
-    assert(query != null && query.isNotEmpty);
-    final uri = Uri.https(_authority, '/sug', <String, String>{'s': query});
+  Future<List<Word>> suggestions(String query, {int max}) async {
+    final queryParams = <String, String>{'s': query};
+    if (max != null) {
+      queryParams.addAll({'max': '$max'});
+    }
+    final uri = Uri.https(_authority, '/sug', queryParams);
     return _fetchWords(uri);
   }
 

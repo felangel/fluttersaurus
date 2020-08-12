@@ -1,0 +1,11 @@
+name: thesaurus_repository
+description: A Dart package for the thesaurus domain.
+version: 1.0.0+1
+
+environment:
+  sdk: ">=2.7.0 <3.0.0"
+
+dependencies:
+  datamuse_api:
+    path: ../datamuse_api
+  meta: ^1.1.8
