@@ -11,6 +11,9 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  flutter_bloc: ^6.0.1
+  thesaurus_repository:
+    path: packages/thesaurus_repository
 
 dev_dependencies:
   flutter_test:
