@@ -1,0 +1,29 @@
+name: fluttersaurus
+
+on:
+  push:
+    paths:
+      - "lib/**"
+      - "test/**"
+      - ".github/workflows/fluttersaurus.yaml"
+
+  pull_request:
+    paths:
+      - "lib/**"
+      - "test/**"
+      - ".github/workflows/fluttersaurus.yaml"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: subosito/flutter-action@v1.3.0
+      - name: Install Dependencies
+        run: flutter packages get
+      - name: Format
+        run: flutter format --set-exit-if-changed lib test
+      - name: Analyze
+        run: flutter analyze lib test
+      - name: Run tests
+        run: flutter test --no-pub --coverage --test-randomize-ordering-seed random

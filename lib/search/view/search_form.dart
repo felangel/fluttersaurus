@@ -59,6 +59,7 @@ class _SearchLoading extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Shimmer.fromColors(
+      key: const Key('search_loading_shimmer'),
       baseColor: Colors.grey[300],
       highlightColor: Colors.grey[100],
       enabled: true,
@@ -100,6 +101,7 @@ class _SearchInitial extends StatelessWidget {
     final textTheme = Theme.of(context).textTheme;
     return Text(
       'Find some fancy words ✨',
+      key: const Key('search_initial_text'),
       style: GoogleFonts.roboto(
         textStyle: textTheme.headline6.copyWith(fontWeight: FontWeight.w300),
       ),

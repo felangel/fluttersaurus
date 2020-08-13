@@ -1,5 +1,5 @@
 name: fluttersaurus
-description: A Flutter thesaurus.
+description: A Flutter thesaurus made for Byteconf Flutter 2020.
 
 publish_to: "none" # Remove this line if you wish to publish to pub.dev
 
@@ -23,7 +23,9 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  bloc_test: ^7.0.0
   flutter_launcher_icons: ^0.7.5
+  mockito: ^4.0.0
 
 flutter:
   uses-material-design: true

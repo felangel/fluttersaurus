@@ -14,6 +14,7 @@ class SearchBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextField(
+      key: const Key('searchBar_textField'),
       style: GoogleFonts.roboto(),
       decoration: InputDecoration(
         filled: true,

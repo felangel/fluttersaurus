@@ -54,6 +54,7 @@ class _SynonymsSuccess extends StatelessWidget {
   Widget build(BuildContext context) {
     final textTheme = Theme.of(context).textTheme;
     return Column(
+      key: const Key('synonyms_success_column'),
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisSize: MainAxisSize.min,
       children: [
@@ -94,6 +95,7 @@ class _SynonymsLoading extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Shimmer.fromColors(
+      key: const Key('synonyms_loading_shimmer'),
       baseColor: Colors.grey[300],
       highlightColor: Colors.grey[100],
       enabled: true,
@@ -114,6 +116,7 @@ class _SynonymsFailure extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const Center(
+      key: Key('synonyms_failure_center'),
       child: Icon(Icons.warning, color: Colors.redAccent),
     );
   }
