@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttersaurus/search/search.dart';
 import 'package:fluttersaurus/synonyms/synonyms.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:shimmer/shimmer.dart';
 
 class SearchForm extends StatelessWidget {
   @override
@@ -58,7 +59,19 @@ class _SearchLoading extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const CircularProgressIndicator();
+    return Shimmer.fromColors(
+      baseColor: Colors.grey[300],
+      highlightColor: Colors.grey[100],
+      enabled: true,
+      child: ListView.separated(
+        itemBuilder: (context, index) => Container(
+          height: 48.0,
+          color: Colors.white,
+        ),
+        itemCount: 10,
+        separatorBuilder: (context, index) => const SizedBox(height: 16),
+      ),
+    );
   }
 }
 

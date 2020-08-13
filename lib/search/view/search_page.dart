@@ -7,9 +7,9 @@ class SearchPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final textTheme = Theme.of(context).textTheme;
-    return SafeArea(
-      child: Scaffold(
-        body: Align(
+    return Scaffold(
+      body: SafeArea(
+        child: Align(
           alignment: const Alignment(0, -3 / 5),
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 24.0),

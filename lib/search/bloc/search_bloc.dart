@@ -23,7 +23,7 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
     TransitionFunction<SearchEvent, SearchState> transitionFn,
   ) {
     return events
-        .debounceTime(const Duration(milliseconds: 300))
+        .debounceTime(const Duration(milliseconds: 350))
         .switchMap(transitionFn);
   }
 
