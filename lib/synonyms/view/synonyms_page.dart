@@ -20,11 +20,7 @@ class SynonymsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-        iconTheme: const IconThemeData(color: Colors.black87),
-      ),
+      appBar: AppBar(),
       body: BlocProvider(
         create: (context) => SynonymsCubit(
           context.repository<ThesaurusRepository>(),

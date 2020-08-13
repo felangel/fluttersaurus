@@ -12,8 +12,8 @@ dependencies:
   flutter:
     sdk: flutter
   equatable: ^1.2.3
+  bloc: ^6.0.1
   flutter_bloc: ^6.0.1
-  flutter_typeahead_web: ^1.0.0+1
   google_fonts: ^1.1.0
   rxdart: ^0.24.0
   shimmer: ^1.1.1

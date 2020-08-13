@@ -20,6 +20,12 @@ class Fluttersaurus extends StatelessWidget {
       value: _thesaurusRepository,
       child: MaterialApp(
         theme: ThemeData(
+          appBarTheme: const AppBarTheme(
+            brightness: Brightness.light,
+            color: Colors.transparent,
+            elevation: 0,
+            iconTheme: IconThemeData(color: Colors.black87),
+          ),
           textTheme: GoogleFonts.abrilFatfaceTextTheme(),
         ),
         home: SearchPage(),
