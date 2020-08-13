@@ -1,5 +1,6 @@
 # fluttersaurus
 
+![fluttersaurus](https://github.com/felangel/fluttersaurus/workflows/fluttersaurus/badge.svg)
 [![bloc library](https://tinyurl.com/bloc-library)](https://pub.dev/packages/bloc)
 [![License: MIT](https://img.shields.io/badge/license-MIT-purple.svg)](https://opensource.org/licenses/MIT)
 
