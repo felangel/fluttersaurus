@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttersaurus/synonyms/synonyms.dart';
-import 'package:thesaurus_repository/thesaurus_repository.dart';
 
 class SynonymsPage extends StatelessWidget {
   const SynonymsPage._({Key key, @required String word})
@@ -21,12 +19,8 @@ class SynonymsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(),
-      body: BlocProvider(
-        create: (context) => SynonymsCubit(
-          context.repository<ThesaurusRepository>(),
-        )..getSynonyms(word: _word),
-        child: SynonymsView(word: _word),
-      ),
+      // TODO: Provide SynonymsCubit
+      body: SynonymsView(word: _word),
     );
   }
 }

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttersaurus/synonyms/synonyms.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:shimmer/shimmer.dart';
@@ -25,19 +24,9 @@ class SynonymsView extends StatelessWidget {
             style: textTheme.headline2.copyWith(color: Colors.black87),
           ),
           const SizedBox(height: 24),
-          Flexible(
-            child: BlocBuilder<SynonymsCubit, SynonymsState>(
-              builder: (context, state) {
-                switch (state.status) {
-                  case SynonymsStatus.loading:
-                    return const _SynonymsLoading();
-                  case SynonymsStatus.success:
-                    return _SynonymsSuccess(synonyms: state.synonyms);
-                  default:
-                    return const _SynonymsFailure();
-                }
-              },
-            ),
+          const Flexible(
+            // TODO: React to state changes
+            child: _SynonymsLoading(),
           ),
         ],
       ),
