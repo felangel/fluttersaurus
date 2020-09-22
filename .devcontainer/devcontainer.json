@@ -1,3 +1,4 @@
 {
-  "image": "cirrusci/flutter:beta"
+  "image": "cirrusci/flutter:beta",
+  "forwardPorts": [3000]
 }
