@@ -48,8 +48,8 @@ void main() {
         build: () => SynonymsCubit(thesaurusRepository),
         act: (cubit) => cubit.getSynonyms(word: word),
         expect: const <SynonymsState>[
-          SynonymsState.loading(),
-          SynonymsState.success(<Synonym>[]),
+          SynonymsState.loading(word: word),
+          SynonymsState.success(word: word, synonyms: <Synonym>[]),
         ],
       );
 
@@ -64,8 +64,11 @@ void main() {
         },
         act: (cubit) => cubit.getSynonyms(word: word),
         expect: const <SynonymsState>[
-          SynonymsState.loading(),
-          SynonymsState.success(<Synonym>[Synonym('flap')]),
+          SynonymsState.loading(word: word),
+          SynonymsState.success(
+            word: word,
+            synonyms: <Synonym>[Synonym('flap')],
+          ),
         ],
       );
 
@@ -80,7 +83,7 @@ void main() {
         },
         act: (cubit) => cubit.getSynonyms(word: word),
         expect: const <SynonymsState>[
-          SynonymsState.loading(),
+          SynonymsState.loading(word: word),
           SynonymsState.failure(),
         ],
       );

@@ -21,13 +21,15 @@ void main() {
 
     testWidgets('renders loading shimmer when state is loading',
         (tester) async {
-      when(synonymsCubit.state).thenReturn(const SynonymsState.loading());
+      when(synonymsCubit.state).thenReturn(
+        const SynonymsState.loading(word: word),
+      );
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
             body: BlocProvider.value(
               value: synonymsCubit,
-              child: const SynonymsView(word: word),
+              child: const SynonymsView(),
             ),
           ),
         ),
@@ -37,13 +39,15 @@ void main() {
 
     testWidgets('renders SynonymsSuccess when state is success',
         (tester) async {
-      when(synonymsCubit.state).thenReturn(const SynonymsState.success([]));
+      when(synonymsCubit.state).thenReturn(
+        const SynonymsState.success(word: word, synonyms: []),
+      );
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
             body: BlocProvider.value(
               value: synonymsCubit,
-              child: const SynonymsView(word: word),
+              child: const SynonymsView(),
             ),
           ),
         ),
@@ -59,7 +63,7 @@ void main() {
           home: Scaffold(
             body: BlocProvider.value(
               value: synonymsCubit,
-              child: const SynonymsView(word: word),
+              child: const SynonymsView(),
             ),
           ),
         ),
