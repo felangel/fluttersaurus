@@ -14,11 +14,11 @@ class SynonymsCubit extends Cubit<SynonymsState> {
   final ThesaurusRepository _thesaurusRepository;
 
   Future<void> getSynonyms({@required String word}) async {
-    emit(const SynonymsState.loading());
+    emit(SynonymsState.loading(word: word));
     try {
       final results = await _thesaurusRepository.synonyms(word: word);
       final synonyms = results.map((result) => Synonym(result)).toList();
-      emit(SynonymsState.success(synonyms));
+      emit(SynonymsState.success(word: word, synonyms: synonyms));
     } on Exception {
       emit(const SynonymsState.failure());
     }

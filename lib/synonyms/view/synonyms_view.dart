@@ -5,11 +5,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:shimmer/shimmer.dart';
 
 class SynonymsView extends StatelessWidget {
-  const SynonymsView({Key key, @required this.word})
-      : assert(word != null),
-        super(key: key);
-
-  final String word;
+  const SynonymsView({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -20,13 +16,20 @@ class SynonymsView extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
-            word,
-            style: textTheme.headline2.copyWith(color: Colors.black87),
+          BlocBuilder<SynonymsCubit, SynonymsState>(
+            buildWhen: (previous, current) => previous.word != current.word,
+            builder: (context, state) {
+              return Text(
+                state?.word ?? '--',
+                style: textTheme.headline2.copyWith(color: Colors.black87),
+              );
+            },
           ),
           const SizedBox(height: 24),
           Flexible(
             child: BlocBuilder<SynonymsCubit, SynonymsState>(
+              buildWhen: (previous, current) =>
+                  previous.status != current.status,
               builder: (context, state) {
                 switch (state.status) {
                   case SynonymsStatus.loading:
