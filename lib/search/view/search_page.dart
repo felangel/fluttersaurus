@@ -31,7 +31,7 @@ class SearchPage extends StatelessWidget {
             Flexible(
               child: BlocProvider(
                 create: (context) => SearchBloc(
-                  context.repository<ThesaurusRepository>(),
+                  context.read<ThesaurusRepository>(),
                 ),
                 child: SearchForm(),
               ),

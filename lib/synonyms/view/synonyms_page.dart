@@ -10,7 +10,7 @@ class SynonymsPage extends StatelessWidget {
     return MaterialPageRoute<void>(
       builder: (_) => BlocProvider(
         create: (context) => SynonymsCubit(
-          context.repository<ThesaurusRepository>(),
+          context.read<ThesaurusRepository>(),
         )..getSynonyms(word: word),
         child: const SynonymsPage._(),
       ),

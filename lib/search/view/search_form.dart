@@ -13,7 +13,7 @@ class SearchForm extends StatelessWidget {
       children: [
         SearchBar(
           onChanged: (term) {
-            context.bloc<SearchBloc>().add(SearchTermChanged(term));
+            context.read<SearchBloc>().add(SearchTermChanged(term));
           },
         ),
         const SizedBox(height: 16),
