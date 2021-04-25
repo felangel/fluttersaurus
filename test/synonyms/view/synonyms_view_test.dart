@@ -55,6 +55,28 @@ void main() {
       expect(find.byKey(const Key('synonyms_success_column')), findsOneWidget);
     });
 
+    testWidgets('renders each synonym when state is success and has synomyms',
+        (tester) async {
+      final results = ['flap', 'dart', 'fleet'];
+      final synonyms = results.map((result) => Synonym(result)).toList();
+      when(synonymsCubit.state).thenReturn(
+        SynonymsState.success(word: word, synonyms: synonyms),
+      );
+      await tester.pumpWidget(
+        MaterialApp(
+          home: Scaffold(
+            body: BlocProvider.value(
+              value: synonymsCubit,
+              child: const SynonymsView(),
+            ),
+          ),
+        ),
+      );
+      for (var result in results) {
+        expect(find.text(result), findsOneWidget);
+      }
+    });
+
     testWidgets('renders SynonymsFailure when state is failure',
         (tester) async {
       when(synonymsCubit.state).thenReturn(const SynonymsState.failure());
