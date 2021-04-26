@@ -72,7 +72,7 @@ void main() {
           ),
         ),
       );
-      for (var result in results) {
+      for (final result in results) {
         expect(find.text(result), findsOneWidget);
       }
     });
