@@ -29,7 +29,7 @@ class JsonDeserializationException implements Exception {}
 /// {@endtemplate}
 class DatamuseApiClient {
   /// {@macro datamuse_api_client}
-  DatamuseApiClient({http.Client httpClient})
+  DatamuseApiClient({http.Client? httpClient})
       : _httpClient = httpClient ?? http.Client();
 
   static const _authority = 'api.datamuse.com';
@@ -39,10 +39,10 @@ class DatamuseApiClient {
   /// Returns a list of words (and multiword expressions)
   /// from a given vocabulary that match a given set of constraints.
   Future<List<Word>> words({
-    String meansLike,
-    String soundsLike,
-    String spelledLike,
-    int max,
+    String? meansLike,
+    String? soundsLike,
+    String? spelledLike,
+    int? max,
   }) async {
     final queryParams = <String, String>{};
     if (meansLike != null) {
@@ -63,7 +63,7 @@ class DatamuseApiClient {
 
   /// Provides word suggestions given a partially-entered query.
   /// GET /sug?s=$query
-  Future<List<Word>> suggestions(String query, {int max}) async {
+  Future<List<Word>> suggestions(String query, {int? max}) async {
     final queryParams = <String, String>{'s': query};
     if (max != null) {
       queryParams.addAll({'max': '$max'});
