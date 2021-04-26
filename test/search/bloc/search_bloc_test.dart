@@ -1,7 +1,7 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:fluttersaurus/search/search.dart';
-import 'package:mockito/mockito.dart';
+import 'package:mocktail/mocktail.dart';
 import 'package:thesaurus_repository/thesaurus_repository.dart';
 
 class MockThesaurusRepository extends Mock implements ThesaurusRepository {}
@@ -30,10 +30,12 @@ void main() {
       const term = 'cats';
 
       setUp(() {
-        when(thesaurusRepository.search(
-          term: anyNamed('term'),
-          limit: anyNamed('limit'),
-        )).thenAnswer((_) async => <String>[]);
+        when(
+          () => thesaurusRepository.search(
+            term: any(named: 'term'),
+            limit: any(named: 'limit'),
+          ),
+        ).thenAnswer((_) async => <String>[]);
       });
 
       blocTest<SearchBloc, SearchState>(
@@ -42,7 +44,7 @@ void main() {
         act: (bloc) => bloc.add(const SearchTermChanged(term)),
         wait: debounceDuration,
         verify: (_) {
-          verify(thesaurusRepository.search(term: term)).called(1);
+          verify(() => thesaurusRepository.search(term: term)).called(1);
         },
       );
 
@@ -51,7 +53,7 @@ void main() {
         build: () => SearchBloc(thesaurusRepository),
         act: (bloc) => bloc.add(const SearchTermChanged('')),
         wait: debounceDuration,
-        expect: const <SearchState>[
+        expect: () => const <SearchState>[
           SearchState.initial(),
         ],
       );
@@ -61,7 +63,7 @@ void main() {
         build: () => SearchBloc(thesaurusRepository),
         act: (bloc) => bloc.add(const SearchTermChanged(term)),
         wait: debounceDuration,
-        expect: const <SearchState>[
+        expect: () => const <SearchState>[
           SearchState.loading(),
           SearchState.success([]),
         ],
@@ -70,15 +72,17 @@ void main() {
       blocTest<SearchBloc, SearchState>(
         'emits [loading, success] when search succeeds (populated)',
         build: () {
-          when(thesaurusRepository.search(
-            term: anyNamed('term'),
-            limit: anyNamed('limit'),
-          )).thenAnswer((_) async => const <String>['kitty']);
+          when(
+            () => thesaurusRepository.search(
+              term: any(named: 'term'),
+              limit: any(named: 'limit'),
+            ),
+          ).thenAnswer((_) async => const <String>['kitty']);
           return SearchBloc(thesaurusRepository);
         },
         act: (bloc) => bloc.add(const SearchTermChanged(term)),
         wait: debounceDuration,
-        expect: const <SearchState>[
+        expect: () => const <SearchState>[
           SearchState.loading(),
           SearchState.success([Suggestion('kitty')]),
         ],
@@ -87,16 +91,18 @@ void main() {
       blocTest<SearchBloc, SearchState>(
         'emits [success] when search succeeds and status is already success',
         build: () {
-          when(thesaurusRepository.search(
-            term: anyNamed('term'),
-            limit: anyNamed('limit'),
-          )).thenAnswer((_) async => const <String>['kitty']);
+          when(
+            () => thesaurusRepository.search(
+              term: any(named: 'term'),
+              limit: any(named: 'limit'),
+            ),
+          ).thenAnswer((_) async => const <String>['kitty']);
           return SearchBloc(thesaurusRepository)
             ..emit(const SearchState.success([]));
         },
         act: (bloc) => bloc.add(const SearchTermChanged(term)),
         wait: debounceDuration,
-        expect: const <SearchState>[
+        expect: () => const <SearchState>[
           SearchState.success([Suggestion('kitty')]),
         ],
       );
@@ -104,15 +110,17 @@ void main() {
       blocTest<SearchBloc, SearchState>(
         'emits [loading, failure] when search throws',
         build: () {
-          when(thesaurusRepository.search(
-            term: anyNamed('term'),
-            limit: anyNamed('limit'),
-          )).thenThrow(Exception('oops'));
+          when(
+            () => thesaurusRepository.search(
+              term: any(named: 'term'),
+              limit: any(named: 'limit'),
+            ),
+          ).thenThrow(Exception('oops'));
           return SearchBloc(thesaurusRepository);
         },
         act: (bloc) => bloc.add(const SearchTermChanged(term)),
         wait: debounceDuration,
-        expect: const <SearchState>[
+        expect: () => const <SearchState>[
           SearchState.loading(),
           SearchState.failure(),
         ],
@@ -126,8 +134,8 @@ void main() {
           ..add(const SearchTermChanged('cat')),
         wait: debounceDuration,
         verify: (_) {
-          verifyNever(thesaurusRepository.search(term: 'kitty'));
-          verify(thesaurusRepository.search(term: 'cat')).called(1);
+          verifyNever(() => thesaurusRepository.search(term: 'kitty'));
+          verify(() => thesaurusRepository.search(term: 'cat')).called(1);
         },
       );
     });

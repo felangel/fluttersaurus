@@ -1,7 +1,7 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:fluttersaurus/synonyms/synonyms.dart';
-import 'package:mockito/mockito.dart';
+import 'package:mocktail/mocktail.dart';
 import 'package:thesaurus_repository/thesaurus_repository.dart';
 
 class MockThesaurusRepository extends Mock implements ThesaurusRepository {}
@@ -28,10 +28,10 @@ void main() {
       const word = 'flutter';
 
       setUp(() {
-        when(thesaurusRepository.synonyms(
-          word: anyNamed('word'),
-          limit: anyNamed('limit'),
-        )).thenAnswer((_) async => <String>[]);
+        when(() => thesaurusRepository.synonyms(
+              word: any(named: 'word'),
+              limit: any(named: 'limit'),
+            )).thenAnswer((_) async => <String>[]);
       });
 
       blocTest<SynonymsCubit, SynonymsState>(
@@ -39,7 +39,7 @@ void main() {
         build: () => SynonymsCubit(thesaurusRepository),
         act: (cubit) => cubit.getSynonyms(word: word),
         verify: (_) {
-          verify(thesaurusRepository.synonyms(word: word)).called(1);
+          verify(() => thesaurusRepository.synonyms(word: word)).called(1);
         },
       );
 
@@ -47,7 +47,7 @@ void main() {
         'emits [loading, success] when synonyms succeeds (empty)',
         build: () => SynonymsCubit(thesaurusRepository),
         act: (cubit) => cubit.getSynonyms(word: word),
-        expect: const <SynonymsState>[
+        expect: () => const <SynonymsState>[
           SynonymsState.loading(word: word),
           SynonymsState.success(word: word, synonyms: <Synonym>[]),
         ],
@@ -56,14 +56,14 @@ void main() {
       blocTest<SynonymsCubit, SynonymsState>(
         'emits [loading, success] when synonyms succeeds (populated)',
         build: () {
-          when(thesaurusRepository.synonyms(
-            word: anyNamed('word'),
-            limit: anyNamed('limit'),
-          )).thenAnswer((_) async => <String>['flap']);
+          when(() => thesaurusRepository.synonyms(
+                word: any(named: 'word'),
+                limit: any(named: 'limit'),
+              )).thenAnswer((_) async => <String>['flap']);
           return SynonymsCubit(thesaurusRepository);
         },
         act: (cubit) => cubit.getSynonyms(word: word),
-        expect: const <SynonymsState>[
+        expect: () => const <SynonymsState>[
           SynonymsState.loading(word: word),
           SynonymsState.success(
             word: word,
@@ -75,14 +75,14 @@ void main() {
       blocTest<SynonymsCubit, SynonymsState>(
         'emits [loading, failure] when synonyms throws',
         build: () {
-          when(thesaurusRepository.synonyms(
-            word: anyNamed('word'),
-            limit: anyNamed('limit'),
-          )).thenThrow(Exception('oops'));
+          when(() => thesaurusRepository.synonyms(
+                word: any(named: 'word'),
+                limit: any(named: 'limit'),
+              )).thenThrow(Exception('oops'));
           return SynonymsCubit(thesaurusRepository);
         },
         act: (cubit) => cubit.getSynonyms(word: word),
-        expect: const <SynonymsState>[
+        expect: () => const <SynonymsState>[
           SynonymsState.loading(word: word),
           SynonymsState.failure(),
         ],

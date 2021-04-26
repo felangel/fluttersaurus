@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:fluttersaurus/synonyms/synonyms.dart';
-import 'package:mockito/mockito.dart';
+import 'package:mocktail/mocktail.dart';
 import 'package:thesaurus_repository/thesaurus_repository.dart';
 
 class MockThesaurusRepository extends Mock implements ThesaurusRepository {}
@@ -14,7 +14,7 @@ void main() {
 
     setUp(() {
       thesaurusRepository = MockThesaurusRepository();
-      when(thesaurusRepository.synonyms(word: anyNamed('word')))
+      when(() => thesaurusRepository.synonyms(word: any(named: 'word')))
           .thenAnswer((_) async => const <String>[]);
     });
 
@@ -37,7 +37,7 @@ void main() {
         ),
       ));
       await tester.pumpAndSettle();
-      verify(thesaurusRepository.synonyms(word: word)).called(1);
+      verify(() => thesaurusRepository.synonyms(word: word)).called(1);
     });
   });
 }

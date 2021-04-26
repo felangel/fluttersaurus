@@ -4,20 +4,30 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:fluttersaurus/search/search.dart';
 import 'package:fluttersaurus/synonyms/synonyms.dart';
-import 'package:mockito/mockito.dart';
+import 'package:mocktail/mocktail.dart';
 import 'package:thesaurus_repository/thesaurus_repository.dart';
 
 class MockThesaurusRepository extends Mock implements ThesaurusRepository {}
 
-class MockSearchBloc extends MockBloc<SearchState> implements SearchBloc {}
+class MockSearchBloc extends MockBloc<SearchEvent, SearchState>
+    implements SearchBloc {}
+
+class FakeSearchEvent extends Fake implements SearchEvent {}
+
+class FakeSearchState extends Fake implements SearchState {}
 
 void main() {
   group('SearchForm', () {
     SearchBloc searchBloc;
 
+    setUpAll(() {
+      registerFallbackValue(FakeSearchEvent());
+      registerFallbackValue(FakeSearchState());
+    });
+
     setUp(() {
       searchBloc = MockSearchBloc();
-      when(searchBloc.state).thenReturn(const SearchState.initial());
+      when(() => searchBloc.state).thenReturn(const SearchState.initial());
     });
 
     testWidgets('adds SearchTermChanged when text is entered', (tester) async {
@@ -38,11 +48,11 @@ void main() {
         term,
       );
 
-      verify(searchBloc.add(const SearchTermChanged(term))).called(1);
+      verify(() => searchBloc.add(const SearchTermChanged(term))).called(1);
     });
 
     testWidgets('renders initial text when state is initial', (tester) async {
-      when(searchBloc.state).thenReturn(const SearchState.initial());
+      when(() => searchBloc.state).thenReturn(const SearchState.initial());
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
@@ -58,7 +68,7 @@ void main() {
 
     testWidgets('renders loading shimmer when state is loading',
         (tester) async {
-      when(searchBloc.state).thenReturn(const SearchState.loading());
+      when(() => searchBloc.state).thenReturn(const SearchState.loading());
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
@@ -73,7 +83,7 @@ void main() {
     });
 
     testWidgets('renders SearchResults when state is success', (tester) async {
-      when(searchBloc.state).thenReturn(const SearchState.success([]));
+      when(() => searchBloc.state).thenReturn(const SearchState.success([]));
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
@@ -88,7 +98,7 @@ void main() {
     });
 
     testWidgets('renders SnackBar when state is failure', (tester) async {
-      when(searchBloc.state).thenReturn(const SearchState.failure());
+      when(() => searchBloc.state).thenReturn(const SearchState.failure());
       whenListen(
         searchBloc,
         Stream.fromIterable(
@@ -115,9 +125,9 @@ void main() {
         (tester) async {
       const word = 'kitty';
       final thesaurusRepository = MockThesaurusRepository();
-      when(thesaurusRepository.synonyms(word: anyNamed('word')))
+      when(() => thesaurusRepository.synonyms(word: any(named: 'word')))
           .thenAnswer((_) async => []);
-      when(searchBloc.state).thenReturn(
+      when(() => searchBloc.state).thenReturn(
         const SearchState.success([Suggestion(word)]),
       );
       await tester.pumpWidget(

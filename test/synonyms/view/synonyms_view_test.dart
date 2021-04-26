@@ -2,26 +2,31 @@ import 'package:bloc_test/bloc_test.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:fluttersaurus/search/search.dart';
 import 'package:fluttersaurus/synonyms/synonyms.dart';
-import 'package:mockito/mockito.dart';
+import 'package:mocktail/mocktail.dart';
 
-class MockSynonymsCubit extends MockBloc<SearchState> implements SynonymsCubit {
-}
+class MockSynonymsCubit extends MockCubit<SynonymsState>
+    implements SynonymsCubit {}
+
+class FakeSynonymsState extends Fake implements SynonymsState {}
 
 void main() {
   group('SynonymsView', () {
     const word = 'flutter';
     SynonymsCubit synonymsCubit;
 
+    setUpAll(() {
+      registerFallbackValue(FakeSynonymsState());
+    });
+
     setUp(() {
       synonymsCubit = MockSynonymsCubit();
-      when(synonymsCubit.state).thenReturn(const SynonymsState.loading());
+      when(() => synonymsCubit.state).thenReturn(const SynonymsState.loading());
     });
 
     testWidgets('renders loading shimmer when state is loading',
         (tester) async {
-      when(synonymsCubit.state).thenReturn(
+      when(() => synonymsCubit.state).thenReturn(
         const SynonymsState.loading(word: word),
       );
       await tester.pumpWidget(
@@ -39,7 +44,7 @@ void main() {
 
     testWidgets('renders SynonymsSuccess when state is success',
         (tester) async {
-      when(synonymsCubit.state).thenReturn(
+      when(() => synonymsCubit.state).thenReturn(
         const SynonymsState.success(word: word, synonyms: []),
       );
       await tester.pumpWidget(
@@ -59,7 +64,7 @@ void main() {
         (tester) async {
       final results = ['flap', 'dart', 'fleet'];
       final synonyms = results.map((result) => Synonym(result)).toList();
-      when(synonymsCubit.state).thenReturn(
+      when(() => synonymsCubit.state).thenReturn(
         SynonymsState.success(word: word, synonyms: synonyms),
       );
       await tester.pumpWidget(
@@ -79,7 +84,7 @@ void main() {
 
     testWidgets('renders SynonymsFailure when state is failure',
         (tester) async {
-      when(synonymsCubit.state).thenReturn(const SynonymsState.failure());
+      when(() => synonymsCubit.state).thenReturn(const SynonymsState.failure());
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
