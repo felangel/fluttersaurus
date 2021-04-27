@@ -7,7 +7,7 @@ import 'package:thesaurus_repository/thesaurus_repository.dart';
 class MockThesaurusRepository extends Mock implements ThesaurusRepository {}
 
 void main() {
-  const debounceDuration = Duration(milliseconds: 350);
+  const debounceDuration = Duration(milliseconds: 500);
 
   group('SearchBloc', () {
     ThesaurusRepository thesaurusRepository;
