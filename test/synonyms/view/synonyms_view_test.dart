@@ -13,7 +13,7 @@ class FakeSynonymsState extends Fake implements SynonymsState {}
 void main() {
   group('SynonymsView', () {
     const word = 'flutter';
-    SynonymsCubit synonymsCubit;
+    late SynonymsCubit synonymsCubit;
 
     setUpAll(() {
       registerFallbackValue(FakeSynonymsState());

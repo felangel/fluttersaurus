@@ -54,14 +54,14 @@ class _SearchContent extends StatelessWidget {
 }
 
 class _SearchLoading extends StatelessWidget {
-  const _SearchLoading({Key key}) : super(key: key);
+  const _SearchLoading({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Shimmer.fromColors(
       key: const Key('search_loading_shimmer'),
-      baseColor: Colors.grey[300],
-      highlightColor: Colors.grey[100],
+      baseColor: Colors.grey.shade300,
+      highlightColor: Colors.grey.shade100,
       enabled: true,
       child: ListView.separated(
         itemBuilder: (context, index) => Container(
@@ -76,7 +76,7 @@ class _SearchLoading extends StatelessWidget {
 }
 
 class _SearchSuccess extends StatelessWidget {
-  const _SearchSuccess({Key key, @required this.suggestions}) : super(key: key);
+  const _SearchSuccess({Key? key, required this.suggestions}) : super(key: key);
 
   final List<Suggestion> suggestions;
 
@@ -94,7 +94,7 @@ class _SearchSuccess extends StatelessWidget {
 }
 
 class _SearchInitial extends StatelessWidget {
-  const _SearchInitial({Key key}) : super(key: key);
+  const _SearchInitial({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -103,7 +103,7 @@ class _SearchInitial extends StatelessWidget {
       'Find some fancy words ✨',
       key: const Key('search_initial_text'),
       style: GoogleFonts.roboto(
-        textStyle: textTheme.headline6.copyWith(fontWeight: FontWeight.w300),
+        textStyle: textTheme.headline6?.copyWith(fontWeight: FontWeight.w300),
       ),
     );
   }

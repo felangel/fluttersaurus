@@ -8,14 +8,10 @@ class MockThesaurusRepository extends Mock implements ThesaurusRepository {}
 
 void main() {
   group('SynonymsCubit', () {
-    ThesaurusRepository thesaurusRepository;
+    late ThesaurusRepository thesaurusRepository;
 
     setUp(() {
       thesaurusRepository = MockThesaurusRepository();
-    });
-
-    test('throws AssertionError when thesaurusRepository is null', () {
-      expect(() => SynonymsCubit(null), throwsAssertionError);
     });
 
     test('initial state is SynonymsState.loading', () {

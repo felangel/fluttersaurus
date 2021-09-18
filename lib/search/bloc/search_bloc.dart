@@ -10,49 +10,35 @@ import 'package:thesaurus_repository/thesaurus_repository.dart';
 part 'search_event.dart';
 part 'search_state.dart';
 
+EventTransformer<E> _debounce<E>() {
+  return (events, mapper) {
+    return events
+        .debounceTime(const Duration(milliseconds: 350))
+        .switchMap(mapper);
+  };
+}
+
 class SearchBloc extends Bloc<SearchEvent, SearchState> {
-  SearchBloc(this._thesaurusRepository)
-      : assert(_thesaurusRepository != null),
-        super(const SearchState.initial());
+  SearchBloc(this._thesaurusRepository) : super(const SearchState.initial()) {
+    on<SearchTermChanged>(_onSearchTermChanged, transformer: _debounce());
+  }
 
   final ThesaurusRepository _thesaurusRepository;
 
-  @override
-  Stream<Transition<SearchEvent, SearchState>> transformEvents(
-    Stream<SearchEvent> events,
-    TransitionFunction<SearchEvent, SearchState> transitionFn,
-  ) {
-    return events
-        .debounceTime(const Duration(milliseconds: 350))
-        .switchMap(transitionFn);
-  }
-
-  @override
-  Stream<SearchState> mapEventToState(SearchEvent event) async* {
-    if (event is SearchTermChanged) {
-      yield* _mapSearchTermChangedToState(event, state);
-    }
-  }
-
-  Stream<SearchState> _mapSearchTermChangedToState(
+  Future<void> _onSearchTermChanged(
     SearchTermChanged event,
-    SearchState state,
-  ) async* {
-    if (event.term.isEmpty) {
-      yield const SearchState.initial();
-      return;
-    }
+    Emitter<SearchState> emit,
+  ) async {
+    if (event.term.isEmpty) return emit(const SearchState.initial());
 
-    if (state.status != SearchStatus.success) {
-      yield const SearchState.loading();
-    }
+    if (state.status != SearchStatus.success) emit(const SearchState.loading());
 
     try {
       final results = await _thesaurusRepository.search(term: event.term);
       final suggestions = results.map((result) => Suggestion(result)).toList();
-      yield SearchState.success(suggestions);
-    } on Exception {
-      yield const SearchState.failure();
+      emit(SearchState.success(suggestions));
+    } catch (_) {
+      emit(const SearchState.failure());
     }
   }
 }

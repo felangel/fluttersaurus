@@ -10,7 +10,7 @@ class MockThesaurusRepository extends Mock implements ThesaurusRepository {}
 void main() {
   group('SynonymsPage', () {
     const word = 'flutter';
-    ThesaurusRepository thesaurusRepository;
+    late ThesaurusRepository thesaurusRepository;
 
     setUp(() {
       thesaurusRepository = MockThesaurusRepository();

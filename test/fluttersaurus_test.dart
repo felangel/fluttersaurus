@@ -8,13 +8,6 @@ class MockThesaurusRepository extends Mock implements ThesaurusRepository {}
 
 void main() {
   group('Fluttersaurus', () {
-    test('throws AssertionError when thesaurusRepository is null', () {
-      expect(
-        () => Fluttersaurus(thesaurusRepository: null),
-        throwsAssertionError,
-      );
-    });
-
     testWidgets('renders SearchPage when thesaurusRepository is not null',
         (tester) async {
       await tester.pumpWidget(Fluttersaurus(

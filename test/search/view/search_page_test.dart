@@ -9,7 +9,7 @@ class MockThesaurusRepository extends Mock implements ThesaurusRepository {}
 
 void main() {
   group('SearchPage', () {
-    ThesaurusRepository thesaurusRepository;
+    late ThesaurusRepository thesaurusRepository;
 
     setUp(() {
       thesaurusRepository = MockThesaurusRepository();
