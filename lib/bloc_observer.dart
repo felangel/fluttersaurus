@@ -2,7 +2,7 @@ import 'package:bloc/bloc.dart';
 
 class FluttersaurusBlocObserver extends BlocObserver {
   @override
-  void onEvent(Bloc bloc, Object event) {
+  void onEvent(Bloc bloc, Object? event) {
     super.onEvent(bloc, event);
     print('${bloc.runtimeType} $event');
   }

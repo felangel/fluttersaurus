@@ -5,7 +5,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:shimmer/shimmer.dart';
 
 class SynonymsView extends StatelessWidget {
-  const SynonymsView({Key key}) : super(key: key);
+  const SynonymsView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -20,8 +20,8 @@ class SynonymsView extends StatelessWidget {
             buildWhen: (previous, current) => previous.word != current.word,
             builder: (context, state) {
               return Text(
-                state?.word ?? '--',
-                style: textTheme.headline2.copyWith(color: Colors.black87),
+                state.word ?? '--',
+                style: textTheme.headline2?.copyWith(color: Colors.black87),
               );
             },
           ),
@@ -49,7 +49,7 @@ class SynonymsView extends StatelessWidget {
 }
 
 class _SynonymsSuccess extends StatelessWidget {
-  const _SynonymsSuccess({Key key, this.synonyms}) : super(key: key);
+  const _SynonymsSuccess({Key? key, required this.synonyms}) : super(key: key);
 
   final List<Synonym> synonyms;
 
@@ -63,7 +63,7 @@ class _SynonymsSuccess extends StatelessWidget {
       children: [
         Text(
           'Synonyms',
-          style: textTheme.headline5.copyWith(
+          style: textTheme.headline5?.copyWith(
             color: Colors.black87,
             fontWeight: FontWeight.bold,
           ),
@@ -93,14 +93,14 @@ class _SynonymsSuccess extends StatelessWidget {
 }
 
 class _SynonymsLoading extends StatelessWidget {
-  const _SynonymsLoading({Key key}) : super(key: key);
+  const _SynonymsLoading({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Shimmer.fromColors(
       key: const Key('synonyms_loading_shimmer'),
-      baseColor: Colors.grey[300],
-      highlightColor: Colors.grey[100],
+      baseColor: Colors.grey.shade300,
+      highlightColor: Colors.grey.shade100,
       enabled: true,
       child: Column(
         children: [
@@ -114,7 +114,7 @@ class _SynonymsLoading extends StatelessWidget {
 }
 
 class _SynonymsFailure extends StatelessWidget {
-  const _SynonymsFailure({Key key}) : super(key: key);
+  const _SynonymsFailure({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

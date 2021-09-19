@@ -9,19 +9,19 @@ class SynonymsState extends Equatable {
     this.word,
   });
 
-  const SynonymsState.loading({String word}) : this._(word: word);
+  const SynonymsState.loading({String? word}) : this._(word: word);
 
   const SynonymsState.success({
-    @required String word,
-    @required List<Synonym> synonyms,
+    required String word,
+    required List<Synonym> synonyms,
   }) : this._(word: word, status: SynonymsStatus.success, synonyms: synonyms);
 
   const SynonymsState.failure() : this._(status: SynonymsStatus.failure);
 
   final SynonymsStatus status;
   final List<Synonym> synonyms;
-  final String word;
+  final String? word;
 
   @override
-  List<Object> get props => [status, synonyms, word];
+  List<Object?> get props => [status, synonyms, word];
 }

@@ -5,7 +5,7 @@
       "name": "fluttersaurus",
       "request": "launch",
       "type": "dart",
-      "args": ["-d", "chrome", "--web-port", "3000"]
+      "program": "lib/main.dart"
     }
   ]
 }

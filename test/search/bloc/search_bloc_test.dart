@@ -10,14 +10,10 @@ void main() {
   const debounceDuration = Duration(milliseconds: 500);
 
   group('SearchBloc', () {
-    ThesaurusRepository thesaurusRepository;
+    late ThesaurusRepository thesaurusRepository;
 
     setUp(() {
       thesaurusRepository = MockThesaurusRepository();
-    });
-
-    test('throws AssertionError when thesaurusRepository is null', () {
-      expect(() => SearchBloc(null), throwsAssertionError);
     });
 
     test('initial state is SearchState.initial', () {

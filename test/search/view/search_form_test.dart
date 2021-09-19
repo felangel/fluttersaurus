@@ -18,7 +18,7 @@ class FakeSearchState extends Fake implements SearchState {}
 
 void main() {
   group('SearchForm', () {
-    SearchBloc searchBloc;
+    late SearchBloc searchBloc;
 
     setUpAll(() {
       registerFallbackValue(FakeSearchEvent());

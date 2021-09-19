@@ -21,7 +21,7 @@ class SearchPage extends StatelessWidget {
                 const SizedBox(width: 8),
                 Text(
                   'Fluttersaurus',
-                  style: textTheme.headline4.copyWith(
+                  style: textTheme.headline4?.copyWith(
                     color: Colors.black87,
                   ),
                 ),
