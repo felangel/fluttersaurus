@@ -5,12 +5,14 @@ on:
     paths:
       - "lib/**"
       - "test/**"
+      - "pubspec.*"
       - ".github/workflows/fluttersaurus.yaml"
 
   pull_request:
     paths:
       - "lib/**"
       - "test/**"
+      - "pubspec.*"
       - ".github/workflows/fluttersaurus.yaml"
 
 jobs:
