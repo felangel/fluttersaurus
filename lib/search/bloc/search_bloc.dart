@@ -1,26 +1,31 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
+import 'package:bloc_concurrency/bloc_concurrency.dart';
 import 'package:equatable/equatable.dart';
 import 'package:fluttersaurus/search/models/suggestion.dart';
 import 'package:fluttersaurus/search/search.dart';
-import 'package:rxdart/rxdart.dart';
+import 'package:stream_transform/stream_transform.dart';
 import 'package:thesaurus_repository/thesaurus_repository.dart';
 
 part 'search_event.dart';
 part 'search_state.dart';
 
-EventTransformer<E> _debounce<E>() {
+EventTransformer<E> _restartableDebounce<E>() {
   return (events, mapper) {
-    return events
-        .debounceTime(const Duration(milliseconds: 350))
-        .switchMap(mapper);
+    return restartable<E>()(
+      events.debounce(const Duration(milliseconds: 350)),
+      mapper,
+    );
   };
 }
 
 class SearchBloc extends Bloc<SearchEvent, SearchState> {
   SearchBloc(this._thesaurusRepository) : super(const SearchState.initial()) {
-    on<SearchTermChanged>(_onSearchTermChanged, transformer: _debounce());
+    on<SearchTermChanged>(
+      _onSearchTermChanged,
+      transformer: _restartableDebounce(),
+    );
   }
 
   final ThesaurusRepository _thesaurusRepository;

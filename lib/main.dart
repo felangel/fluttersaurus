@@ -5,10 +5,8 @@ import 'package:fluttersaurus/fluttersaurus.dart';
 import 'package:thesaurus_repository/thesaurus_repository.dart';
 
 void main() {
-  Bloc.observer = FluttersaurusBlocObserver();
-  runApp(
-    Fluttersaurus(
-      thesaurusRepository: ThesaurusRepository(),
-    ),
+  BlocOverrides.runZoned(
+    () => runApp(Fluttersaurus(thesaurusRepository: ThesaurusRepository())),
+    blocObserver: FluttersaurusBlocObserver(),
   );
 }
