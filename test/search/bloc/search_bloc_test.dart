@@ -67,15 +67,15 @@ void main() {
 
       blocTest<SearchBloc, SearchState>(
         'emits [loading, success] when search succeeds (populated)',
-        build: () {
+        setUp: () {
           when(
             () => thesaurusRepository.search(
               term: any(named: 'term'),
               limit: any(named: 'limit'),
             ),
           ).thenAnswer((_) async => const <String>['kitty']);
-          return SearchBloc(thesaurusRepository);
         },
+        build: () => SearchBloc(thesaurusRepository),
         act: (bloc) => bloc.add(const SearchTermChanged(term)),
         wait: debounceDuration,
         expect: () => const <SearchState>[
@@ -86,16 +86,16 @@ void main() {
 
       blocTest<SearchBloc, SearchState>(
         'emits [success] when search succeeds and status is already success',
-        build: () {
+        setUp: () {
           when(
             () => thesaurusRepository.search(
               term: any(named: 'term'),
               limit: any(named: 'limit'),
             ),
           ).thenAnswer((_) async => const <String>['kitty']);
-          return SearchBloc(thesaurusRepository)
-            ..emit(const SearchState.success([]));
         },
+        build: () => SearchBloc(thesaurusRepository),
+        seed: () => const SearchState.success([]),
         act: (bloc) => bloc.add(const SearchTermChanged(term)),
         wait: debounceDuration,
         expect: () => const <SearchState>[
@@ -105,15 +105,15 @@ void main() {
 
       blocTest<SearchBloc, SearchState>(
         'emits [loading, failure] when search throws',
-        build: () {
+        setUp: () {
           when(
             () => thesaurusRepository.search(
               term: any(named: 'term'),
               limit: any(named: 'limit'),
             ),
           ).thenThrow(Exception('oops'));
-          return SearchBloc(thesaurusRepository);
         },
+        build: () => SearchBloc(thesaurusRepository),
         act: (bloc) => bloc.add(const SearchTermChanged(term)),
         wait: debounceDuration,
         expect: () => const <SearchState>[
