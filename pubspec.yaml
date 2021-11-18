@@ -9,10 +9,10 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  bloc: ^8.0.0-dev.5
-  bloc_concurrency: ^0.2.0-dev.2
+  bloc: ^8.0.0
+  bloc_concurrency: ^0.2.0
   equatable: ^2.0.3
-  flutter_bloc: ^8.0.0-dev.3
+  flutter_bloc: ^8.0.0
   google_fonts: ^2.1.0
   stream_transform: ^2.0.0
   shimmer: ^2.0.0
@@ -22,7 +22,7 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  bloc_test: ^9.0.0-dev.5
+  bloc_test: ^9.0.0
   flutter_launcher_icons: ^0.9.0
   mocktail: ^0.2.0
 
