@@ -63,7 +63,7 @@ void main() {
     testWidgets('renders each synonym when state is success and has synomyms',
         (tester) async {
       final results = ['flap', 'dart', 'fleet'];
-      final synonyms = results.map((result) => Synonym(result)).toList();
+      final synonyms = results.map(Synonym.new).toList();
       when(() => synonymsCubit.state).thenReturn(
         SynonymsState.success(word: word, synonyms: synonyms),
       );

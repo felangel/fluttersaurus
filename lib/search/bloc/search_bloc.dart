@@ -40,7 +40,7 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
 
     try {
       final results = await _thesaurusRepository.search(term: event.term);
-      final suggestions = results.map((result) => Suggestion(result)).toList();
+      final suggestions = results.map(Suggestion.new).toList();
       emit(SearchState.success(suggestions));
     } catch (_) {
       emit(const SearchState.failure());
