@@ -15,7 +15,7 @@ class SynonymsCubit extends Cubit<SynonymsState> {
     emit(SynonymsState.loading(word: word));
     try {
       final results = await _thesaurusRepository.synonyms(word: word);
-      final synonyms = results.map((result) => Synonym(result)).toList();
+      final synonyms = results.map(Synonym.new).toList();
       emit(SynonymsState.success(word: word, synonyms: synonyms));
     } on Exception {
       emit(const SynonymsState.failure());

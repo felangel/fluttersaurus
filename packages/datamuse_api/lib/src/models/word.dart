@@ -21,7 +21,7 @@ class Word {
   final int score;
 
   /// One or more part-of-speech codes.
-  @JsonKey(defaultValue: <Tag>[])
+  @JsonKey(defaultValue: <Tag>[], unknownEnumValue: Tag.unknown)
   final List<Tag> tags;
 }
 
