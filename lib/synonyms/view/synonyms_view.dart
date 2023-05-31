@@ -5,7 +5,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:shimmer/shimmer.dart';
 
 class SynonymsView extends StatelessWidget {
-  const SynonymsView({Key? key}) : super(key: key);
+  const SynonymsView({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +21,7 @@ class SynonymsView extends StatelessWidget {
             builder: (context, state) {
               return Text(
                 state.word ?? '--',
-                style: textTheme.headline2?.copyWith(color: Colors.black87),
+                style: textTheme.displayMedium?.copyWith(color: Colors.black87),
               );
             },
           ),
@@ -36,7 +36,7 @@ class SynonymsView extends StatelessWidget {
                     return const _SynonymsLoading();
                   case SynonymsStatus.success:
                     return _SynonymsSuccess(synonyms: state.synonyms);
-                  default:
+                  case SynonymsStatus.failure:
                     return const _SynonymsFailure();
                 }
               },
@@ -49,7 +49,7 @@ class SynonymsView extends StatelessWidget {
 }
 
 class _SynonymsSuccess extends StatelessWidget {
-  const _SynonymsSuccess({Key? key, required this.synonyms}) : super(key: key);
+  const _SynonymsSuccess({required this.synonyms});
 
   final List<Synonym> synonyms;
 
@@ -63,7 +63,7 @@ class _SynonymsSuccess extends StatelessWidget {
       children: [
         Text(
           'Synonyms',
-          style: textTheme.headline5?.copyWith(
+          style: textTheme.headlineSmall?.copyWith(
             color: Colors.black87,
             fontWeight: FontWeight.bold,
           ),
@@ -80,7 +80,7 @@ class _SynonymsSuccess extends StatelessWidget {
                 child: Text(
                   synonym.value,
                   style: GoogleFonts.robotoCondensed(
-                    textStyle: textTheme.headline6,
+                    textStyle: textTheme.titleLarge,
                   ).copyWith(fontWeight: FontWeight.w100),
                 ),
               );
@@ -93,7 +93,7 @@ class _SynonymsSuccess extends StatelessWidget {
 }
 
 class _SynonymsLoading extends StatelessWidget {
-  const _SynonymsLoading({Key? key}) : super(key: key);
+  const _SynonymsLoading();
 
   @override
   Widget build(BuildContext context) {
@@ -101,12 +101,11 @@ class _SynonymsLoading extends StatelessWidget {
       key: const Key('synonyms_loading_shimmer'),
       baseColor: Colors.grey.shade300,
       highlightColor: Colors.grey.shade100,
-      enabled: true,
       child: Column(
         children: [
-          Container(height: 48.0, color: Colors.white),
+          Container(height: 48, color: Colors.white),
           const SizedBox(height: 16),
-          Container(height: 300.0, color: Colors.white),
+          Container(height: 300, color: Colors.white),
         ],
       ),
     );
@@ -114,7 +113,7 @@ class _SynonymsLoading extends StatelessWidget {
 }
 
 class _SynonymsFailure extends StatelessWidget {
-  const _SynonymsFailure({Key? key}) : super(key: key);
+  const _SynonymsFailure();
 
   @override
   Widget build(BuildContext context) {

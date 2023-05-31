@@ -4,13 +4,15 @@ import 'package:fluttersaurus/search/search.dart';
 import 'package:thesaurus_repository/thesaurus_repository.dart';
 
 class SearchPage extends StatelessWidget {
+  const SearchPage({super.key});
+
   @override
   Widget build(BuildContext context) {
     final textTheme = Theme.of(context).textTheme;
     return Scaffold(
       appBar: AppBar(),
       body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 24.0),
+        padding: const EdgeInsets.symmetric(horizontal: 24),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -21,7 +23,7 @@ class SearchPage extends StatelessWidget {
                 const SizedBox(width: 8),
                 Text(
                   'Fluttersaurus',
-                  style: textTheme.headline4?.copyWith(
+                  style: textTheme.headlineMedium?.copyWith(
                     color: Colors.black87,
                   ),
                 ),
@@ -33,7 +35,7 @@ class SearchPage extends StatelessWidget {
                 create: (context) => SearchBloc(
                   context.read<ThesaurusRepository>(),
                 ),
-                child: SearchForm(),
+                child: const SearchForm(),
               ),
             ),
           ],

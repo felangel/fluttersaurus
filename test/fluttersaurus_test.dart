@@ -10,9 +10,11 @@ void main() {
   group('Fluttersaurus', () {
     testWidgets('renders SearchPage when thesaurusRepository is not null',
         (tester) async {
-      await tester.pumpWidget(Fluttersaurus(
-        thesaurusRepository: MockThesaurusRepository(),
-      ));
+      await tester.pumpWidget(
+        Fluttersaurus(
+          thesaurusRepository: MockThesaurusRepository(),
+        ),
+      );
       expect(find.byType(SearchPage), findsOneWidget);
     });
   });

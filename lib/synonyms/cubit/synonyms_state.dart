@@ -2,7 +2,7 @@ part of 'synonyms_cubit.dart';
 
 enum SynonymsStatus { loading, success, failure }
 
-class SynonymsState extends Equatable {
+final class SynonymsState extends Equatable {
   const SynonymsState._({
     this.status = SynonymsStatus.loading,
     this.synonyms = const <Synonym>[],

@@ -4,9 +4,9 @@ import 'package:fluttersaurus/synonyms/synonyms.dart';
 import 'package:thesaurus_repository/thesaurus_repository.dart';
 
 class SynonymsPage extends StatelessWidget {
-  const SynonymsPage._({Key? key}) : super(key: key);
+  const SynonymsPage._();
 
-  static Route route({required String word}) {
+  static Route<void> route({required String word}) {
     return MaterialPageRoute<void>(
       builder: (_) => BlocProvider(
         create: (context) => SynonymsCubit(

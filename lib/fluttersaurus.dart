@@ -7,10 +7,9 @@ import 'package:thesaurus_repository/thesaurus_repository.dart';
 
 class Fluttersaurus extends StatelessWidget {
   const Fluttersaurus({
-    Key? key,
     required ThesaurusRepository thesaurusRepository,
-  })  : _thesaurusRepository = thesaurusRepository,
-        super(key: key);
+    super.key,
+  }) : _thesaurusRepository = thesaurusRepository;
 
   final ThesaurusRepository _thesaurusRepository;
 
@@ -28,7 +27,7 @@ class Fluttersaurus extends StatelessWidget {
           ),
           textTheme: GoogleFonts.abrilFatfaceTextTheme(),
         ),
-        home: SearchPage(),
+        home: const SearchPage(),
       ),
     );
   }

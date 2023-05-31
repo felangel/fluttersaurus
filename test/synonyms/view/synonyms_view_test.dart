@@ -8,15 +8,13 @@ import 'package:mocktail/mocktail.dart';
 class MockSynonymsCubit extends MockCubit<SynonymsState>
     implements SynonymsCubit {}
 
-class FakeSynonymsState extends Fake implements SynonymsState {}
-
 void main() {
   group('SynonymsView', () {
     const word = 'flutter';
     late SynonymsCubit synonymsCubit;
 
     setUpAll(() {
-      registerFallbackValue(FakeSynonymsState());
+      registerFallbackValue(const SynonymsState.loading());
     });
 
     setUp(() {

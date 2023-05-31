@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart' hide SearchBar;
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttersaurus/search/search.dart';
 import 'package:fluttersaurus/synonyms/synonyms.dart';
@@ -6,6 +6,8 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:shimmer/shimmer.dart';
 
 class SearchForm extends StatelessWidget {
+  const SearchForm({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -40,12 +42,13 @@ class _SearchContent extends StatelessWidget {
         },
         builder: (context, state) {
           switch (state.status) {
+            case SearchStatus.initial:
+            case SearchStatus.failure:
+              return const _SearchInitial();
             case SearchStatus.loading:
               return const _SearchLoading();
             case SearchStatus.success:
               return _SearchSuccess(suggestions: state.suggestions);
-            default:
-              return const _SearchInitial();
           }
         },
       ),
@@ -54,7 +57,7 @@ class _SearchContent extends StatelessWidget {
 }
 
 class _SearchLoading extends StatelessWidget {
-  const _SearchLoading({Key? key}) : super(key: key);
+  const _SearchLoading();
 
   @override
   Widget build(BuildContext context) {
@@ -62,10 +65,9 @@ class _SearchLoading extends StatelessWidget {
       key: const Key('search_loading_shimmer'),
       baseColor: Colors.grey.shade300,
       highlightColor: Colors.grey.shade100,
-      enabled: true,
       child: ListView.separated(
         itemBuilder: (context, index) => Container(
-          height: 48.0,
+          height: 48,
           color: Colors.white,
         ),
         itemCount: 10,
@@ -76,7 +78,7 @@ class _SearchLoading extends StatelessWidget {
 }
 
 class _SearchSuccess extends StatelessWidget {
-  const _SearchSuccess({Key? key, required this.suggestions}) : super(key: key);
+  const _SearchSuccess({required this.suggestions});
 
   final List<Suggestion> suggestions;
 
@@ -94,7 +96,7 @@ class _SearchSuccess extends StatelessWidget {
 }
 
 class _SearchInitial extends StatelessWidget {
-  const _SearchInitial({Key? key}) : super(key: key);
+  const _SearchInitial();
 
   @override
   Widget build(BuildContext context) {
@@ -103,7 +105,7 @@ class _SearchInitial extends StatelessWidget {
       'Find some fancy words ✨',
       key: const Key('search_initial_text'),
       style: GoogleFonts.roboto(
-        textStyle: textTheme.headline6?.copyWith(fontWeight: FontWeight.w300),
+        textStyle: textTheme.titleLarge?.copyWith(fontWeight: FontWeight.w300),
       ),
     );
   }

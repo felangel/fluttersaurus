@@ -2,7 +2,7 @@ part of 'search_bloc.dart';
 
 enum SearchStatus { initial, loading, success, failure }
 
-class SearchState extends Equatable {
+final class SearchState extends Equatable {
   const SearchState._({
     this.status = SearchStatus.initial,
     this.suggestions = const <Suggestion>[],

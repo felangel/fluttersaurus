@@ -3,10 +3,10 @@ import 'package:fluttersaurus/search/search.dart';
 
 class SearchResults extends StatelessWidget {
   const SearchResults({
-    Key? key,
     required this.onTap,
+    super.key,
     this.suggestions = const <Suggestion>[],
-  }) : super(key: key);
+  });
 
   final ValueSetter<Suggestion> onTap;
   final List<Suggestion> suggestions;
@@ -26,10 +26,9 @@ class SearchResults extends StatelessWidget {
 
 class _SearchResult extends StatelessWidget {
   const _SearchResult({
-    Key? key,
     required this.suggestion,
     required this.onTap,
-  }) : super(key: key);
+  });
 
   final Suggestion suggestion;
   final VoidCallback onTap;

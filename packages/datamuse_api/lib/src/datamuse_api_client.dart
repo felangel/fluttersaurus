@@ -85,7 +85,7 @@ class DatamuseApiClient {
       throw HttpRequestFailure(response.statusCode);
     }
 
-    List body;
+    final List<dynamic> body;
 
     try {
       body = json.decode(response.body) as List;

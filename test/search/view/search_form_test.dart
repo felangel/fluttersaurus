@@ -12,17 +12,13 @@ class MockThesaurusRepository extends Mock implements ThesaurusRepository {}
 class MockSearchBloc extends MockBloc<SearchEvent, SearchState>
     implements SearchBloc {}
 
-class FakeSearchEvent extends Fake implements SearchEvent {}
-
-class FakeSearchState extends Fake implements SearchState {}
-
 void main() {
   group('SearchForm', () {
     late SearchBloc searchBloc;
 
     setUpAll(() {
-      registerFallbackValue(FakeSearchEvent());
-      registerFallbackValue(FakeSearchState());
+      registerFallbackValue(const SearchTermChanged(''));
+      registerFallbackValue(const SearchState.initial());
     });
 
     setUp(() {
@@ -37,7 +33,7 @@ void main() {
           home: Scaffold(
             body: BlocProvider.value(
               value: searchBloc,
-              child: SearchForm(),
+              child: const SearchForm(),
             ),
           ),
         ),
@@ -58,7 +54,7 @@ void main() {
           home: Scaffold(
             body: BlocProvider.value(
               value: searchBloc,
-              child: SearchForm(),
+              child: const SearchForm(),
             ),
           ),
         ),
@@ -74,7 +70,7 @@ void main() {
           home: Scaffold(
             body: BlocProvider.value(
               value: searchBloc,
-              child: SearchForm(),
+              child: const SearchForm(),
             ),
           ),
         ),
@@ -89,7 +85,7 @@ void main() {
           home: Scaffold(
             body: BlocProvider.value(
               value: searchBloc,
-              child: SearchForm(),
+              child: const SearchForm(),
             ),
           ),
         ),
@@ -111,7 +107,7 @@ void main() {
           home: Scaffold(
             body: BlocProvider.value(
               value: searchBloc,
-              child: SearchForm(),
+              child: const SearchForm(),
             ),
           ),
         ),
@@ -137,7 +133,7 @@ void main() {
             home: Scaffold(
               body: BlocProvider.value(
                 value: searchBloc,
-                child: SearchForm(),
+                child: const SearchForm(),
               ),
             ),
           ),

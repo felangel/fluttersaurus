@@ -24,10 +24,12 @@ void main() {
       const word = 'flutter';
 
       setUp(() {
-        when(() => thesaurusRepository.synonyms(
-              word: any(named: 'word'),
-              limit: any(named: 'limit'),
-            )).thenAnswer((_) async => <String>[]);
+        when(
+          () => thesaurusRepository.synonyms(
+            word: any(named: 'word'),
+            limit: any(named: 'limit'),
+          ),
+        ).thenAnswer((_) async => <String>[]);
       });
 
       blocTest<SynonymsCubit, SynonymsState>(
@@ -52,10 +54,12 @@ void main() {
       blocTest<SynonymsCubit, SynonymsState>(
         'emits [loading, success] when synonyms succeeds (populated)',
         build: () {
-          when(() => thesaurusRepository.synonyms(
-                word: any(named: 'word'),
-                limit: any(named: 'limit'),
-              )).thenAnswer((_) async => <String>['flap']);
+          when(
+            () => thesaurusRepository.synonyms(
+              word: any(named: 'word'),
+              limit: any(named: 'limit'),
+            ),
+          ).thenAnswer((_) async => <String>['flap']);
           return SynonymsCubit(thesaurusRepository);
         },
         act: (cubit) => cubit.getSynonyms(word: word),
@@ -71,10 +75,12 @@ void main() {
       blocTest<SynonymsCubit, SynonymsState>(
         'emits [loading, failure] when synonyms throws',
         build: () {
-          when(() => thesaurusRepository.synonyms(
-                word: any(named: 'word'),
-                limit: any(named: 'limit'),
-              )).thenThrow(Exception('oops'));
+          when(
+            () => thesaurusRepository.synonyms(
+              word: any(named: 'word'),
+              limit: any(named: 'limit'),
+            ),
+          ).thenThrow(Exception('oops'));
           return SynonymsCubit(thesaurusRepository);
         },
         act: (cubit) => cubit.getSynonyms(word: word),

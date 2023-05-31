@@ -5,7 +5,7 @@ import 'package:datamuse_api/datamuse_api.dart';
 /// {@endtemplate}
 class ThesaurusException implements Exception {
   /// {@macro thesaurus_exception}
-  const ThesaurusException(this.exception, {required this.stackTrace});
+  const ThesaurusException(this.exception, this.stackTrace);
 
   /// The exception that occured.
   final dynamic exception;
@@ -19,8 +19,7 @@ class ThesaurusException implements Exception {
 /// {@endtemplate}
 class SearchHttpRequestFailure extends ThesaurusException {
   /// {@macro search_http_request_failure}
-  SearchHttpRequestFailure(HttpRequestFailure failure, StackTrace stackTrace)
-      : super(failure, stackTrace: stackTrace);
+  SearchHttpRequestFailure(super.failure, super.stackTrace);
 }
 
 /// {@template synonyms_exception}
@@ -28,10 +27,7 @@ class SearchHttpRequestFailure extends ThesaurusException {
 /// {@endtemplate}
 class SynonymsException extends ThesaurusException {
   /// {@macro synonyms_exception}
-  SynonymsException(
-    dynamic exception, {
-    required StackTrace stackTrace,
-  }) : super(exception, stackTrace: stackTrace);
+  SynonymsException(super.exception, super.stackTrace);
 }
 
 /// {@template thesaurus_repository}
@@ -49,7 +45,7 @@ class ThesaurusRepository {
   ///
   /// Throws a [SearchHttpRequestFailure] if an error occurs.
   Future<List<String>> search({required String term, int? limit}) async {
-    assert(term.isNotEmpty);
+    assert(term.isNotEmpty, 'term must not be empty');
     try {
       final words = await _datamuseApiClient.suggestions(term, max: limit);
       return words.map((word) => word.word).toList();
@@ -63,12 +59,12 @@ class ThesaurusRepository {
   ///
   /// Throws a [SynonymsException] if an error occurs.
   Future<List<String>> synonyms({required String word, int? limit}) async {
-    assert(word.isNotEmpty);
+    assert(word.isNotEmpty, 'word must not be empty');
     List<Word> words;
     try {
       words = await _datamuseApiClient.words(meansLike: word, max: limit);
     } on Exception catch (error, stackTrace) {
-      throw SynonymsException(error, stackTrace: stackTrace);
+      throw SynonymsException(error, stackTrace);
     }
 
     return words

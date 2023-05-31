@@ -19,23 +19,27 @@ void main() {
     });
 
     testWidgets('renders a SynonymsView', (tester) async {
-      await tester.pumpWidget(RepositoryProvider.value(
-        value: thesaurusRepository,
-        child: MaterialApp(
-          onGenerateRoute: (_) => SynonymsPage.route(word: word),
+      await tester.pumpWidget(
+        RepositoryProvider.value(
+          value: thesaurusRepository,
+          child: MaterialApp(
+            onGenerateRoute: (_) => SynonymsPage.route(word: word),
+          ),
         ),
-      ));
+      );
       await tester.pumpAndSettle();
       expect(find.byType(SynonymsView), findsOneWidget);
     });
 
     testWidgets('requests synonyms', (tester) async {
-      await tester.pumpWidget(RepositoryProvider.value(
-        value: thesaurusRepository,
-        child: MaterialApp(
-          onGenerateRoute: (_) => SynonymsPage.route(word: word),
+      await tester.pumpWidget(
+        RepositoryProvider.value(
+          value: thesaurusRepository,
+          child: MaterialApp(
+            onGenerateRoute: (_) => SynonymsPage.route(word: word),
+          ),
         ),
-      ));
+      );
       await tester.pumpAndSettle();
       verify(() => thesaurusRepository.synonyms(word: word)).called(1);
     });

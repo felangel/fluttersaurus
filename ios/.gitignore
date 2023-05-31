@@ -1,3 +1,4 @@
+**/dgph
 *.mode1v3
 *.mode2v3
 *.moved-aside
@@ -9,7 +10,6 @@
 **/.vagrant/
 **/DerivedData/
 Icon?
-build/
 **/Pods/
 **/.symlinks/
 profile

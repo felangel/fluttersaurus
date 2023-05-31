@@ -18,10 +18,12 @@ void main() {
     });
 
     testWidgets('renders a SearchForm', (tester) async {
-      await tester.pumpWidget(RepositoryProvider.value(
-        value: thesaurusRepository,
-        child: MaterialApp(home: SearchPage()),
-      ));
+      await tester.pumpWidget(
+        RepositoryProvider.value(
+          value: thesaurusRepository,
+          child: const MaterialApp(home: SearchPage()),
+        ),
+      );
       await tester.pumpAndSettle();
       expect(find.byType(SearchForm), findsOneWidget);
     });

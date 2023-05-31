@@ -27,7 +27,7 @@ jobs:
         run: flutter packages get
 
       - name: Format
-        run: flutter format --set-exit-if-changed lib test
+        run: dart format --set-exit-if-changed lib test
 
       - name: Analyze
         run: flutter analyze lib test
@@ -36,4 +36,4 @@ jobs:
         run: flutter test --no-pub --coverage --test-randomize-ordering-seed random
 
       - name: Check Code Coverage
-        uses: VeryGoodOpenSource/very_good_coverage@v1
+        uses: VeryGoodOpenSource/very_good_coverage@v2

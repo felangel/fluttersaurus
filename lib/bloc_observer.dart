@@ -1,20 +1,25 @@
+// ignore_for_file: avoid_print
+
 import 'package:bloc/bloc.dart';
 
 class FluttersaurusBlocObserver extends BlocObserver {
   @override
-  void onEvent(Bloc bloc, Object? event) {
+  void onEvent(Bloc<dynamic, dynamic> bloc, Object? event) {
     super.onEvent(bloc, event);
     print('${bloc.runtimeType} $event');
   }
 
   @override
-  void onTransition(Bloc bloc, Transition transition) {
+  void onTransition(
+    Bloc<dynamic, dynamic> bloc,
+    Transition<dynamic, dynamic> transition,
+  ) {
     super.onTransition(bloc, transition);
     print('${bloc.runtimeType} $transition');
   }
 
   @override
-  void onChange(BlocBase bloc, Change change) {
+  void onChange(BlocBase<dynamic> bloc, Change<dynamic> change) {
     super.onChange(bloc, change);
     if (bloc is! Bloc) {
       print('${bloc.runtimeType} $change');
@@ -22,7 +27,7 @@ class FluttersaurusBlocObserver extends BlocObserver {
   }
 
   @override
-  void onError(BlocBase bloc, Object error, StackTrace stackTrace) {
+  void onError(BlocBase<dynamic> bloc, Object error, StackTrace stackTrace) {
     print('${bloc.runtimeType} $error $stackTrace');
     super.onError(bloc, error, stackTrace);
   }
