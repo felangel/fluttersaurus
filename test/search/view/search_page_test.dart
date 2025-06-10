@@ -13,8 +13,9 @@ void main() {
 
     setUp(() {
       thesaurusRepository = MockThesaurusRepository();
-      when(() => thesaurusRepository.search(term: any(named: 'term')))
-          .thenAnswer((_) async => const <String>[]);
+      when(
+        () => thesaurusRepository.search(term: any(named: 'term')),
+      ).thenAnswer((_) async => const <String>[]);
     });
 
     testWidgets('renders a SearchForm', (tester) async {

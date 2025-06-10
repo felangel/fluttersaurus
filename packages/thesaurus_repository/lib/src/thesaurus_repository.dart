@@ -36,7 +36,7 @@ class SynonymsException extends ThesaurusException {
 class ThesaurusRepository {
   /// {@macro thesaurus_repository}
   ThesaurusRepository({DatamuseApiClient? datamuseApiClient})
-      : _datamuseApiClient = datamuseApiClient ?? DatamuseApiClient();
+    : _datamuseApiClient = datamuseApiClient ?? DatamuseApiClient();
 
   final DatamuseApiClient _datamuseApiClient;
 

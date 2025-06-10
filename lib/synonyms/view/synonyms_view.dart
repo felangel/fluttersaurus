@@ -86,7 +86,7 @@ class _SynonymsSuccess extends StatelessWidget {
               );
             },
           ),
-        )
+        ),
       ],
     );
   }

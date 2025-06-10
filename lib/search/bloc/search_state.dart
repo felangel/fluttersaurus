@@ -13,7 +13,7 @@ final class SearchState extends Equatable {
   const SearchState.loading() : this._(status: SearchStatus.loading);
 
   const SearchState.success(List<Suggestion> suggestions)
-      : this._(status: SearchStatus.success, suggestions: suggestions);
+    : this._(status: SearchStatus.success, suggestions: suggestions);
 
   const SearchState.failure() : this._(status: SearchStatus.failure);
 
