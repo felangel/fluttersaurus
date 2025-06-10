@@ -15,6 +15,7 @@ class SynonymsView extends StatelessWidget {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
+        spacing: 24,
         children: [
           BlocBuilder<SynonymsCubit, SynonymsState>(
             buildWhen: (previous, current) => previous.word != current.word,
@@ -25,7 +26,6 @@ class SynonymsView extends StatelessWidget {
               );
             },
           ),
-          const SizedBox(height: 24),
           Flexible(
             child: BlocBuilder<SynonymsCubit, SynonymsState>(
               buildWhen: (previous, current) =>
@@ -60,6 +60,7 @@ class _SynonymsSuccess extends StatelessWidget {
       key: const Key('synonyms_success_column'),
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisSize: MainAxisSize.min,
+      spacing: 16,
       children: [
         Text(
           'Synonyms',
@@ -102,9 +103,9 @@ class _SynonymsLoading extends StatelessWidget {
       baseColor: Colors.grey.shade300,
       highlightColor: Colors.grey.shade100,
       child: Column(
+        spacing: 16,
         children: [
           Container(height: 48, color: Colors.white),
-          const SizedBox(height: 16),
           Container(height: 300, color: Colors.white),
         ],
       ),

@@ -12,13 +12,13 @@ class SearchForm extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       mainAxisSize: MainAxisSize.min,
+      spacing: 16,
       children: [
         SearchBar(
           onChanged: (term) {
             context.read<SearchBloc>().add(SearchTermChanged(term));
           },
         ),
-        const SizedBox(height: 16),
         _SearchContent(),
       ],
     );

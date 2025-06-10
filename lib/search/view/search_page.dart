@@ -14,6 +14,7 @@ class SearchPage extends StatelessWidget {
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 24),
         child: Column(
+          spacing: 24,
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -29,7 +30,6 @@ class SearchPage extends StatelessWidget {
                 ),
               ],
             ),
-            const SizedBox(height: 24),
             Flexible(
               child: BlocProvider(
                 create: (context) => SearchBloc(
