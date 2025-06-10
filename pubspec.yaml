@@ -13,15 +13,14 @@ dependencies:
   flutter:
     sdk: flutter
   flutter_bloc: ^9.0.0
-  google_fonts: ^4.0.5
-  shimmer: ^2.0.0
+  google_fonts: ^6.2.1
+  shimmer: ^3.0.0
   stream_transform: ^2.0.0
   thesaurus_repository:
     path: packages/thesaurus_repository
 
 dev_dependencies:
   bloc_test: ^10.0.0
-  flutter_launcher_icons: ^0.10.0
   flutter_test:
     sdk: flutter
   mocktail: ^1.0.0
