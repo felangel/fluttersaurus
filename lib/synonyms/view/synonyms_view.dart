@@ -69,24 +69,19 @@ class _SynonymsSuccess extends StatelessWidget {
             fontWeight: FontWeight.bold,
           ),
         ),
-        const SizedBox(height: 16),
-        Flexible(
-          child: ListView.builder(
-            shrinkWrap: true,
-            itemCount: synonyms.length,
-            itemBuilder: (context, index) {
-              final synonym = synonyms[index];
-              return Padding(
-                padding: const EdgeInsets.symmetric(vertical: 8),
-                child: Text(
-                  synonym.value,
-                  style: GoogleFonts.robotoCondensed(
-                    textStyle: textTheme.titleLarge,
-                  ).copyWith(fontWeight: FontWeight.w100),
-                ),
-              );
-            },
-          ),
+        GridView.builder(
+          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 10),
+          shrinkWrap: true,
+          itemCount: synonyms.length,
+          itemBuilder: (context, index) {
+            final synonym = synonyms[index];
+            return Text(
+              synonym.value,
+              style: GoogleFonts.robotoCondensed(
+                textStyle: textTheme.titleLarge,
+              ).copyWith(fontWeight: FontWeight.w100),
+            );
+          },
         ),
       ],
     );
