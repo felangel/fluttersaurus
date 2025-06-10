@@ -8,8 +8,9 @@ class MockThesaurusRepository extends Mock implements ThesaurusRepository {}
 
 void main() {
   group('Fluttersaurus', () {
-    testWidgets('renders SearchPage when thesaurusRepository is not null',
-        (tester) async {
+    testWidgets('renders SearchPage when thesaurusRepository is not null', (
+      tester,
+    ) async {
       await tester.pumpWidget(
         Fluttersaurus(
           thesaurusRepository: MockThesaurusRepository(),

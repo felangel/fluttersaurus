@@ -9,6 +9,17 @@ analyzer:
     missing_required_param: error
     missing_return: error
     record_literal_one_positional_no_trailing_comma: error
+    collection_methods_unrelated_type: warning
+    unrelated_type_equality_checks: warning
+
+  exclude:
+    - test/.test_coverage.dart
+    - lib/generated_plugin_registrant.dart
+    - "**.g.dart"
+
+formatter:
+  trailing_commas: preserve
+  page_width: 80
 
 linter:
   rules:
@@ -17,6 +28,7 @@ linter:
     - always_use_package_imports
     - annotate_overrides
     - avoid_bool_literals_in_conditional_expressions
+    - avoid_catches_without_on_clauses
     - avoid_catching_errors
     - avoid_double_and_int_checks
     - avoid_dynamic_calls
@@ -29,7 +41,6 @@ linter:
     - avoid_init_to_null
     - avoid_js_rounded_ints
     - avoid_multiple_declarations_per_line
-    - avoid_null_checks_in_equality_operators
     - avoid_positional_boolean_parameters
     - avoid_print
     - avoid_private_typedef_functions
@@ -66,6 +77,7 @@ linter:
     - depend_on_referenced_packages
     - deprecated_consistency
     - directives_ordering
+    - document_ignores
     - empty_catches
     - empty_constructor_bodies
     - empty_statements
@@ -74,20 +86,19 @@ linter:
     - file_names
     - flutter_style_todos
     - hash_and_equals
-    - implementation_imports
     - implicit_call_tearoffs
+    - implementation_imports
     - implicit_reopen
     - invalid_case_patterns
-    - iterable_contains_unrelated_type
+    - invalid_runtime_check_with_js_interop_types
     - join_return_with_assignment
     - leading_newlines_in_multiline_strings
     - library_annotations
-    - library_names
     - library_prefixes
     - library_private_types_in_public_api
     - lines_longer_than_80_chars
-    - list_remove_unrelated_type
     - literal_only_boolean_expressions
+    - missing_code_block_language_in_doc_comment
     - missing_whitespace_between_adjacent_strings
     - no_adjacent_strings_in_list
     - no_default_cases
@@ -96,6 +107,8 @@ linter:
     - no_leading_underscores_for_local_identifiers
     - no_logic_in_create_state
     - no_runtimeType_toString
+    - no_self_assignments
+    - no_wildcard_variable_uses
     - non_constant_identifier_names
     - noop_primitive_operations
     - null_check_on_nullable_type_parameter
@@ -104,9 +117,7 @@ linter:
     - one_member_abstracts
     - only_throw_errors
     - overridden_fields
-    - package_api_docs
     - package_names
-    - package_prefixed_library_names
     - parameter_assignments
     - prefer_adjacent_string_concatenation
     - prefer_asserts_in_initializer_lists
@@ -140,10 +151,8 @@ linter:
     - prefer_single_quotes
     - prefer_spread_collections
     - prefer_typing_uninitialized_variables
-    - prefer_void_to_null
     - provide_deprecation_message
     - recursive_getters
-    - require_trailing_commas
     - secure_pubspec_urls
     - sized_box_for_whitespace
     - sized_box_shrink_expand
@@ -152,21 +161,26 @@ linter:
     - sort_constructors_first
     - sort_pub_dependencies
     - sort_unnamed_constructors_first
+    - specify_nonobvious_property_types
+    - strict_top_level_inference
     - test_types_in_equals
     - throw_in_finally
     - tighten_type_of_initializing_formals
     - type_annotate_public_apis
     - type_init_formals
+    - type_literal_in_constant_pattern
     - unawaited_futures
+    - unintended_html_in_doc_comment
     - unnecessary_await_in_return
-    - unnecessary_brace_in_string_interps
     - unnecessary_breaks
+    - unnecessary_brace_in_string_interps
     - unnecessary_const
     - unnecessary_constructor_name
     - unnecessary_getters_setters
     - unnecessary_lambdas
     - unnecessary_late
     - unnecessary_library_directive
+    - unnecessary_library_name
     - unnecessary_new
     - unnecessary_null_aware_assignments
     - unnecessary_null_checks
@@ -180,6 +194,7 @@ linter:
     - unnecessary_string_interpolations
     - unnecessary_this
     - unnecessary_to_list_in_spreads
+    - unnecessary_underscores
     - unrelated_type_equality_checks
     - use_build_context_synchronously
     - use_colored_box

@@ -7,7 +7,7 @@ part 'synonyms_state.dart';
 
 class SynonymsCubit extends Cubit<SynonymsState> {
   SynonymsCubit(this._thesaurusRepository)
-      : super(const SynonymsState.loading());
+    : super(const SynonymsState.loading());
 
   final ThesaurusRepository _thesaurusRepository;
 

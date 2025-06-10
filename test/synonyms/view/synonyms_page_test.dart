@@ -14,8 +14,9 @@ void main() {
 
     setUp(() {
       thesaurusRepository = MockThesaurusRepository();
-      when(() => thesaurusRepository.synonyms(word: any(named: 'word')))
-          .thenAnswer((_) async => const <String>[]);
+      when(
+        () => thesaurusRepository.synonyms(word: any(named: 'word')),
+      ).thenAnswer((_) async => const <String>[]);
     });
 
     testWidgets('renders a SynonymsView', (tester) async {

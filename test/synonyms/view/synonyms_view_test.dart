@@ -22,8 +22,9 @@ void main() {
       when(() => synonymsCubit.state).thenReturn(const SynonymsState.loading());
     });
 
-    testWidgets('renders loading shimmer when state is loading',
-        (tester) async {
+    testWidgets('renders loading shimmer when state is loading', (
+      tester,
+    ) async {
       when(() => synonymsCubit.state).thenReturn(
         const SynonymsState.loading(word: word),
       );
@@ -40,8 +41,9 @@ void main() {
       expect(find.byKey(const Key('synonyms_loading_shimmer')), findsOneWidget);
     });
 
-    testWidgets('renders SynonymsSuccess when state is success',
-        (tester) async {
+    testWidgets('renders SynonymsSuccess when state is success', (
+      tester,
+    ) async {
       when(() => synonymsCubit.state).thenReturn(
         const SynonymsState.success(word: word, synonyms: []),
       );
@@ -58,8 +60,9 @@ void main() {
       expect(find.byKey(const Key('synonyms_success_column')), findsOneWidget);
     });
 
-    testWidgets('renders each synonym when state is success and has synomyms',
-        (tester) async {
+    testWidgets('renders each synonym when state is success and has synomyms', (
+      tester,
+    ) async {
       final results = ['flap', 'dart', 'fleet'];
       final synonyms = results.map(Synonym.new).toList();
       when(() => synonymsCubit.state).thenReturn(
@@ -80,8 +83,9 @@ void main() {
       }
     });
 
-    testWidgets('renders SynonymsFailure when state is failure',
-        (tester) async {
+    testWidgets('renders SynonymsFailure when state is failure', (
+      tester,
+    ) async {
       when(() => synonymsCubit.state).thenReturn(const SynonymsState.failure());
       await tester.pumpWidget(
         MaterialApp(

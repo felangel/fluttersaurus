@@ -62,8 +62,9 @@ void main() {
       expect(find.byKey(const Key('search_initial_text')), findsOneWidget);
     });
 
-    testWidgets('renders loading shimmer when state is loading',
-        (tester) async {
+    testWidgets('renders loading shimmer when state is loading', (
+      tester,
+    ) async {
       when(() => searchBloc.state).thenReturn(const SearchState.loading());
       await tester.pumpWidget(
         MaterialApp(
@@ -117,12 +118,14 @@ void main() {
       expect(find.byType(SnackBar), findsOneWidget);
     });
 
-    testWidgets('navigates to SynonymsPage when suggestion is tapped',
-        (tester) async {
+    testWidgets('navigates to SynonymsPage when suggestion is tapped', (
+      tester,
+    ) async {
       const word = 'kitty';
       final thesaurusRepository = MockThesaurusRepository();
-      when(() => thesaurusRepository.synonyms(word: any(named: 'word')))
-          .thenAnswer((_) async => []);
+      when(
+        () => thesaurusRepository.synonyms(word: any(named: 'word')),
+      ).thenAnswer((_) async => []);
       when(() => searchBloc.state).thenReturn(
         const SearchState.success([Suggestion(word)]),
       );
