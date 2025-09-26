@@ -4,7 +4,8 @@ version: 1.0.0+1
 publish_to: none
 
 environment:
-  sdk: ">=3.8.0 <4.0.0"
+  sdk: ">=3.9.2 <4.0.0"
+  flutter: ">=3.35.4 <4.0.0"
 
 dependencies:
   bloc: ^9.0.0
@@ -20,6 +21,7 @@ dependencies:
     path: packages/thesaurus_repository
 
 dev_dependencies:
+  bloc_lint: ^0.3.2
   bloc_test: ^10.0.0
   flutter_test:
     sdk: flutter

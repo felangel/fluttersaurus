@@ -30,7 +30,7 @@ class JsonDeserializationException implements Exception {}
 class DatamuseApiClient {
   /// {@macro datamuse_api_client}
   DatamuseApiClient({http.Client? httpClient})
-      : _httpClient = httpClient ?? http.Client();
+    : _httpClient = httpClient ?? http.Client();
 
   static const _authority = 'api.datamuse.com';
 

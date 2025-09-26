@@ -21,7 +21,7 @@ class Fluttersaurus extends StatelessWidget {
         theme: ThemeData(
           appBarTheme: const AppBarTheme(
             systemOverlayStyle: SystemUiOverlayStyle.light,
-            color: Colors.transparent,
+            backgroundColor: Colors.transparent,
             elevation: 0,
             iconTheme: IconThemeData(color: Colors.black87),
           ),
