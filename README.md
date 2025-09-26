@@ -1,5 +1,6 @@
 # fluttersaurus
 
+[![shorebird ci](https://api.shorebird.dev/api/v1/github/felangel/fluttersaurus/badge.svg)](https://console.shorebird.dev/ci)
 [![style: bloc lint](https://img.shields.io/badge/style-bloc_lint-20FFE4.svg)](https://pub.dev/packages/bloc_lint)
 [![bloc library](https://tinyurl.com/bloc-library)](https://pub.dev/packages/bloc)
 [![License: MIT](https://img.shields.io/badge/license-MIT-purple.svg)](https://opensource.org/licenses/MIT)
