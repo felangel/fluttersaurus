@@ -6,17 +6,13 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:thesaurus_repository/thesaurus_repository.dart';
 
 class Fluttersaurus extends StatelessWidget {
-  const Fluttersaurus({
-    required ThesaurusRepository thesaurusRepository,
-    super.key,
-  }) : _thesaurusRepository = thesaurusRepository;
-
-  final ThesaurusRepository _thesaurusRepository;
+  const Fluttersaurus({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return RepositoryProvider.value(
-      value: _thesaurusRepository,
+    return RepositoryProvider(
+      create: (_) => ThesaurusRepository(),
+      dispose: (repository) => repository.dispose(),
       child: MaterialApp(
         theme: ThemeData(
           appBarTheme: const AppBarTheme(

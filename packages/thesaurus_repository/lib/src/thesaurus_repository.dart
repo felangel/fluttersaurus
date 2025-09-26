@@ -72,4 +72,10 @@ class ThesaurusRepository {
         .map((word) => word.word)
         .toList();
   }
+
+  /// Disposes any resources that the repository maintains.
+  /// Once dispose is called, the instance can no longer be used.
+  void dispose() {
+    _datamuseApiClient.close();
+  }
 }
