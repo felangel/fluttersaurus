@@ -9,24 +9,27 @@ part of 'word.dart';
 // **************************************************************************
 
 Word _$WordFromJson(Map<String, dynamic> json) => $checkedCreate(
-      'Word',
-      json,
-      ($checkedConvert) {
-        final val = Word(
-          $checkedConvert('word', (v) => v as String),
-          $checkedConvert('score', (v) => v as int),
-          $checkedConvert(
-              'tags',
-              (v) =>
-                  (v as List<dynamic>?)
-                      ?.map((e) => $enumDecode(_$TagEnumMap, e,
-                          unknownValue: Tag.unknown))
-                      .toList() ??
-                  []),
-        );
-        return val;
-      },
+  'Word',
+  json,
+  ($checkedConvert) {
+    final val = Word(
+      $checkedConvert('word', (v) => v as String),
+      $checkedConvert('score', (v) => v as int),
+      $checkedConvert(
+        'tags',
+        (v) =>
+            (v as List<dynamic>?)
+                ?.map(
+                  (e) =>
+                      $enumDecode(_$TagEnumMap, e, unknownValue: Tag.unknown),
+                )
+                .toList() ??
+            [],
+      ),
     );
+    return val;
+  },
+);
 
 const _$TagEnumMap = {
   Tag.synonym: 'syn',
