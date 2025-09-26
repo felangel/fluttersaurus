@@ -101,4 +101,10 @@ class DatamuseApiClient {
       throw JsonDeserializationException();
     }
   }
+
+  /// Closes the client connection.
+  /// Once close is called, the client instance can longer be used.
+  void close() {
+    _httpClient.close();
+  }
 }

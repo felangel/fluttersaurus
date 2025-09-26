@@ -1,21 +1,13 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:fluttersaurus/fluttersaurus.dart';
 import 'package:fluttersaurus/search/search.dart';
-import 'package:mocktail/mocktail.dart';
-import 'package:thesaurus_repository/thesaurus_repository.dart';
-
-class MockThesaurusRepository extends Mock implements ThesaurusRepository {}
 
 void main() {
   group('Fluttersaurus', () {
-    testWidgets('renders SearchPage when thesaurusRepository is not null', (
+    testWidgets('renders SearchPage', (
       tester,
     ) async {
-      await tester.pumpWidget(
-        Fluttersaurus(
-          thesaurusRepository: MockThesaurusRepository(),
-        ),
-      );
+      await tester.pumpWidget(const Fluttersaurus());
       expect(find.byType(SearchPage), findsOneWidget);
     });
   });
