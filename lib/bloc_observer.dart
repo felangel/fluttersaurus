@@ -7,7 +7,13 @@ class FluttersaurusBlocObserver extends BlocObserver {
   @override
   void onEvent(Bloc<dynamic, dynamic> bloc, Object? event) {
     super.onEvent(bloc, event);
-    print('${bloc.runtimeType} $event');
+    print('[onEvent] ${bloc.runtimeType} $event');
+  }
+
+  @override
+  void onChange(BlocBase<dynamic> bloc, Change<dynamic> change) {
+    super.onChange(bloc, change);
+    if (bloc is! Bloc) print('[onChange] ${bloc.runtimeType} $change');
   }
 
   @override
@@ -16,20 +22,23 @@ class FluttersaurusBlocObserver extends BlocObserver {
     Transition<dynamic, dynamic> transition,
   ) {
     super.onTransition(bloc, transition);
-    print('${bloc.runtimeType} $transition');
+    print('[onTransition] ${bloc.runtimeType} $transition');
   }
 
   @override
-  void onChange(BlocBase<dynamic> bloc, Change<dynamic> change) {
-    super.onChange(bloc, change);
-    if (bloc is! Bloc) {
-      print('${bloc.runtimeType} $change');
-    }
+  void onDone(
+    Bloc<dynamic, dynamic> bloc,
+    Object? event, [
+    Object? error,
+    StackTrace? stackTrace,
+  ]) {
+    super.onDone(bloc, event, error, stackTrace);
+    print('[onDone] ${bloc.runtimeType} $event $error');
   }
 
   @override
   void onError(BlocBase<dynamic> bloc, Object error, StackTrace stackTrace) {
-    print('${bloc.runtimeType} $error $stackTrace');
+    print('[onError] ${bloc.runtimeType} $error $stackTrace');
     super.onError(bloc, error, stackTrace);
   }
 }
