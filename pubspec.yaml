@@ -8,7 +8,7 @@ environment:
   flutter: ">=3.35.4 <4.0.0"
 
 dependencies:
-  bloc: ^9.0.0
+  bloc: ^9.1.0
   bloc_concurrency: ^0.3.0
   equatable: ^2.0.3
   flutter:
